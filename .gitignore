@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/iHerb.Checkout.SPI/bin
+/iHerb.Checkout.SPI/obj
+/iHerb.Checkout.API/bin
+/iHerb.Checkout.API/obj
+/obj/Docker
+/.vs

@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  iherb.checkout.api:
+    image: iherb.checkout.api
+    build:
+      context: ./iHerb.Checkout.API
+      dockerfile: Dockerfile
