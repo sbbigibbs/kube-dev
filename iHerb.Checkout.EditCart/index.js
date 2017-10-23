@@ -11,7 +11,7 @@ http.createServer(function(req, res) {
 
     var html = ReactDOMServer.renderToStaticMarkup(body(null,
 
-      div({id: 'root', dangerouslySetInnerHTML: {__html:
+      div({id: 'root', dangerouslySetInnerHTML: {__html:''
         //ReactDOMServer.renderToString(App(props))
       }}),
 
