@@ -22,9 +22,9 @@ http.createServer(function(req, res) {
     
     //console.log(cookies)
     var prefs = cookies['iher-pref1'],
-        language = prefs && prefs['lan'],
-        currency = prefs && prefs['scurcode'],
-        country = prefs && prefs['sccode'],
+        language = prefs && prefs['lan'] || 'en-US',
+        currency = prefs && prefs['scurcode'] || 'USD',
+        country = prefs && prefs['sccode'] || 'US',
         temp = cookies['ihr-temse'],
         id = temp && temp['tempses'];
 
@@ -37,7 +37,7 @@ http.createServer(function(req, res) {
           //console.log(headerHtml),
           //console.log(footerHtml)
           var htmlRes = ReactDOMServer.renderToStaticMarkup(
-            html({ className:'USen EditCart index shopping-cart ios' },
+            html({ className:'responsive-container en EditCart index shopping-cart' },
               head(null, 
                 meta({name:'viewport', content:'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'}),
                 style({rel: 'stylesheet', type: 'text/css', 
@@ -55,7 +55,7 @@ http.createServer(function(req, res) {
 
             div({ dangerouslySetInnerHTML: { __html:headerHtml }}),
 
-            div({id: 'root', dangerouslySetInnerHTML: {__html:''
+            div({id: 'root', style:{ display:'table' }, dangerouslySetInnerHTML: {__html:''
               //ReactDOMServer.renderToString(App(props))
             }}),
 
