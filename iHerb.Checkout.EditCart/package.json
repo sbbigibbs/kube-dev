@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "iherb-ui-tools start --no-start -o ./dist -s ./src/index.js --src src/index.js --platforms web",
+    "build": "iherb-ui-tools start --no-start -o ./dist --html ./index.html -s ./src/index.js --src src --platforms web",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
