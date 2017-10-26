@@ -31,6 +31,9 @@ http.createServer(function(req, res) {
         temp = cookies['ihr-temse'],
         id = temp && temp['tempses'];
 
+    var checkout = process.argv.length >= 3 && process.argv[2] || "https://checkout-api.iherbtest.biz/v1",
+        myaccount = process.argv.length >= 4 && process.argv[3] || "https://myaccount-api.iherbtest.biz/v1";
+
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
 
@@ -52,6 +55,8 @@ http.createServer(function(req, res) {
               window._currency = '${currency}';
               window._country = '${country}';
               window._customerId = '${id}';
+              window._checkoutAPI = '${checkout}';
+              window._myaccountAPI = '${myaccount}';
             `}}),
 
             script({src: 'https://s.images-iherb.com/js/vendor/jquery-1.11.2.min.js' }),
