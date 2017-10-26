@@ -16,6 +16,9 @@ var http = require('http'),
 var bundle = fs.readFileSync('./dist/static/js/bundle.web.js');
 var sum = checksum(bundle);
 
+var checkout = process.argv.length >= 3 && process.argv[2] || "https://checkout-api.iherbtest.biz/v1",
+    myaccount = process.argv.length >= 4 && process.argv[3] || "https://myaccount-api.iherbtest.biz/v1";
+
 http.createServer(function(req, res) {
   console.log(req.url);
 
@@ -30,10 +33,6 @@ http.createServer(function(req, res) {
         country = prefs && prefs['sccode'] || 'US',
         temp = cookies['ihr-temse'],
         id = temp && temp['tempses'];
-
-    var checkout = process.argv.length >= 3 && process.argv[2] || "https://checkout-api.iherbtest.biz/v1",
-        myaccount = process.argv.length >= 4 && process.argv[3] || "https://myaccount-api.iherbtest.biz/v1";
-
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
 
