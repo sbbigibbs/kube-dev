@@ -1,10 +1,11 @@
 var http = require('http'),
     https = require('https'),
+    checksum = require('checksum'),
     fs = require('fs'),
     React = require('react'),
     ReactDOMServer = require('react-dom/server'),
     html = React.createElement.bind(null, 'html'), 
-    head = React.createElement.bind(null, 'header'),
+    head = React.createElement.bind(null, 'head'),
     meta = React.createElement.bind(null, 'meta'),
     body = React.createElement.bind(null, 'body'), 
     div = React.createElement.bind(null, 'div'), 
@@ -12,7 +13,9 @@ var http = require('http'),
     script = React.createElement.bind(null, 'script');
     //App = React.createFactory(require('./App'))
     
-var bundle = fs.readFileSync('./dist/static/js/bundle.web.js')
+var bundle = fs.readFileSync('./dist/static/js/bundle.web.js');
+var sum = checksum(bundle);
+
 http.createServer(function(req, res) {
   console.log(req.url);
 
@@ -31,53 +34,54 @@ http.createServer(function(req, res) {
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
 
-
       header(country, language, currency, (headerHtml) => {
         footer(country, language, currency, (footerHtml) => {
           //console.log(headerHtml),
           //console.log(footerHtml)
           var htmlRes = ReactDOMServer.renderToStaticMarkup(
-            html({ className:'responsive-container en EditCart index shopping-cart' },
+            html({ className:'USA en shopping-cart mobile-web checkout ios' },
               head(null, 
                 meta({name:'viewport', content:'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'}),
                 style({rel: 'stylesheet', type: 'text/css', 
-                href: 'https://s.images-iherb.com/m/css/app.mobile.min_fa83f80d367f6996a47fc6ed1a640697.css'})
-              ),
+                href: 'https://s.images-iherb.com/m/css/app.mobile.min_72b0468335b9e96c0d34361d94497fdf.css'})
+              ),//     https://s.images-iherb.com/m/css/app.mobile.min_72b0468335b9e96c0d34361d94497fdf.css
               body(null,
             
             script({ dangerouslySetInnerHTML: { __html:`
-                window._language = '${language}';
-                window._currency = '${currency}';
-                window._country = '${country}';
-                window._customerId = '${id}';
-            ` }}),
+              window._language = '${language}';
+              window._currency = '${currency}';
+              window._country = '${country}';
+              window._customerId = '${id}';
+            `}}),
+
             script({src: 'https://s.images-iherb.com/js/vendor/jquery-1.11.2.min.js' }),
 
-            div({ dangerouslySetInnerHTML: { __html:headerHtml }}),
+            div({ dangerouslySetInnerHTML: { __html:headerHtml + '<div id="root" style="display:table"></div>' + footerHtml }}),
 
-            div({id: 'root', style:{ display:'table' }, dangerouslySetInnerHTML: {__html:''
-              //ReactDOMServer.renderToString(App(props))
-            }}),
+            // div({id: 'root', style:{ display:'table' }, dangerouslySetInnerHTML: {__html:''
+            //   //ReactDOMServer.renderToString(App(props))
+            // }}),
 
-            div({ dangerouslySetInnerHTML: { __html:footerHtml }}),
+            // ReactDOMServer.hydrate( footerHtml ),
+            //div({ dangerouslySetInnerHTML: { __html:footerHtml] }}),
             
             script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'}),
             script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'}),
-            script({src: '/bundle.js'}),
-            script({src: 'https://s.images-iherb.com/js/app.desktop.min.checkout_05b9c87ca9ff0ea49b1d29d10242c063.js'})
+            script({src: '/public/bundle.' + sum +  '.js'}),
+            script({src: 'https://s.images-iherb.com/m/js/app.mobile.min_4c26b94a7311f3ed0519687f2338059e.js'})
           )))
 
           res.end(htmlRes)
         })
       })
 
-  } else if (req.url == '/bundle.js') {
+  } else if (req.url == '/public/bundle.' + sum + '.js') {
 
     res.setHeader('Content-Type', 'text/javascript')
     res.end(bundle)
     
   } else {
-    forward(req, response => res.end(response))
+    //forward(req, response => res.end(response))
     // res.statusCode = 404
     // res.end()
   }
