@@ -94,6 +94,8 @@ http.createServer(function(req, res) {
 // The http server listens on port 3000
 }).listen(3001, function(err) {
   if (err) throw err
+  console.log("Checkout API: " + checkout)
+  console.log("MyAccount API: " + myaccount)
   console.log('Listening on 3001...')
 })
 
