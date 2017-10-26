@@ -28,5 +28,4 @@ RUN npm run build
 #RUN find . -type f -exec sed -i 's/\x0d//g' {} \+
 
 EXPOSE 3000
-ENTRYPOINT [ "/bin/sh" ]
-CMD [ "-c node", "./index.js", "${CHECKOUT_API_URL}", "${MYACCOUNT_API_URL}" ]
+CMD [ "node", "./index.js" ]

@@ -16,8 +16,8 @@ var http = require('http'),
 var bundle = fs.readFileSync('./dist/static/js/bundle.web.js');
 var sum = checksum(bundle);
 
-var checkout = process.argv.length >= 3 && process.argv[2] || "https://checkout-api.iherbtest.biz/v1",
-    myaccount = process.argv.length >= 4 && process.argv[3] || "https://myaccount-api.iherbtest.biz/v1";
+var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.biz/v1",
+    myaccount = process.env.MYACCOUNT_API_URL || "https://myaccount-api.iherbtest.biz/v1";
 
 http.createServer(function(req, res) {
   console.log(req.url);
