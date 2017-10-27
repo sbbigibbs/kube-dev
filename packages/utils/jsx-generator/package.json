@@ -1,0 +1,36 @@
+{
+  "name": "@iherb/ui-util-jsx-generator",
+  "version": "1.3.24",
+  "main": "lib/",
+  "scripts": {
+    "prepublish": "npm run clean && npm run compile",
+    "compile": "babel src -d lib --ignore **/__tests__",
+    "clean": "rimraf ./lib",
+    "release": "npm run clean && npm run compile && npm publish",
+    "test": "mocha --compilers babel-register src/**.spec.js"
+  },
+  "description": "JSX Generator",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  },
+  "keywords": [
+    "ui-util-jsx-generator"
+  ],
+  "engines": {
+    "node": ">= ^8.0.0",
+    "npm": ">= ^5.0.0"
+  },
+  "devDependencies": {
+    "@iherb/ui-tools-cli": "^1.3.24",
+    "rimraf": "^2.6.2"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015"
+    ]
+  }
+}

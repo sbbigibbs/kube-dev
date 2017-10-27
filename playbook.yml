@@ -1,0 +1,28 @@
+---
+- hosts: all
+  vars:
+    npm_version: 8.5.0
+  tasks:
+  - name: Update and upgrade apt packages
+    become: true
+    apt:
+      upgrade: yes
+      update_cache: yes
+  - name: Download nvm installer
+    get_url: 
+      url: https://raw.githubusercontent.com/creationix/nvm/master/install.sh 
+      dest: /home/{{ ansible_user_id }}/install.sh
+      mode: 0755
+    become: yes
+  - name: Execute nvm installer
+    shell: /bin/bash /home/{{ ansible_user_id }}/install.sh
+      creates=/home/{{ ansible_user_id }}/.nvm/nvm.sh
+  - name: Install npm
+    shell: | 
+      /bin/bash -c "source ~/.nvm/nvm.sh && \
+      nvm install {{ npm_version }} && \
+      nvm alias default {{ npm_version }} && \
+      npm install -g yarn
+      npm install -g lerna"
+
+      creates=/home/{{ ansible_user_id }}/.nvm/alias

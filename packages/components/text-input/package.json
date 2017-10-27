@@ -1,0 +1,73 @@
+{
+  "name": "@iherb/react-primitive-text-input",
+  "description": "Primitive React TextInput Across Targets",
+  "version": "1.3.24",
+  "main": "lib/",
+  "scripts": {
+    "prepublish": "npm run clean && npm run compile && npm run build",
+    "build": "iherb-ui-tools build --modules -o ./lib -s ./src/index.js --src src --library-target commonjs --output-name ReactPrimitiveTextInput --platforms android,ios,web,sketch",
+    "compile": "babel src -d lib --ignore **/__tests__",
+    "clean": "rimraf ./lib",
+    "release": "npm run clean && npm run compile && npm run build && npm publish",
+    "start": "iherb-ui-tools start -o ./dist -s ./examples/web/index.js --public ./examples/web/public --html ./examples/web/public/index.html --src examples/web,src --module-resolver-alias-name @iherb/react-primitive-text-input --module-resolver-alias-val ./src --platforms ios",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0",
+      "stage-1"
+    ]
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-native": "0.47.2",
+    "react-native-web": "0.0.x",
+    "react-primitives": "^0.4.3",
+    "react-scripts": "1.0.11",
+    "react-sketchapp": "^0.6.0",
+    "react-timer-mixin": "^0.13.3"
+  },
+  "devDependencies": {
+    "@iherb/ui-tools-cli": "^1.3.24",
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-module-resolver": "^2.4.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.5.0",
+    "babel-plugin-transform-object-rest-spread": "^6.6.5",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.8",
+    "babel-preset-airbnb": "^1.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-native": "^3.0.2",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "react-addons-test-utils": "^15.0.0",
+    "react-test-renderer": "^15.4.1",
+    "rimraf": "^2.6.1",
+    "watchify": "^3.7.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": {
+    "email": "andrew.cates@iherb.net",
+    "name": "Andrew Cates",
+    "url": "https://gitlab.iherb.net/u/andrew.cates"
+  },
+  "keywords": [
+    "react-primitive-text-input",
+    "@cats/generator-lakewood"
+  ],
+  "engines": {
+    "node": ">= ^8.0.0",
+    "npm": ">= ^5.0.0"
+  }
+}

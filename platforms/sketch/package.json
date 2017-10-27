@@ -1,0 +1,39 @@
+{
+  "name": "@iherb/ecommerce-sketch",
+  "main": "styleguide.sketchplugin",
+  "manifest": "src/manifest.json",
+  "scripts": {
+    "build": "skpm build",
+    "watch": "skpm build --watch",
+    "render": "skpm build --watch --run",
+    "render:once": "skpm build --run",
+    "link-plugin": "skpm link"
+  },
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@iherb/load-cart-base": "^1.3.24",
+    "@iherb/promo-codes-invalid-promo": "^1.3.24",
+    "@iherb/promo-codes-new-customers": "^1.3.24",
+    "@iherb/react-primitive-text-input": "^1.3.24",
+    "@iherb/ui-component-cart-item": "^1.3.24",
+    "@iherb/ui-component-promo-code": "^1.3.24",
+    "@iherb/ui-component-radio-input": "^1.3.24",
+    "@iherb/ui-component-shipping-estimates": "^1.3.24",
+    "@iherb/ui-component-shipping-method": "^1.3.24",
+    "@iherb/ui-translations-cart": "^1.3.24",
+    "@iherb/us-view-cart-three-products": "^1.3.24",
+    "chroma-js": "^1.2.2",
+    "react": "^15.4.2",
+    "react-primitives": "^0.4.3",
+    "react-sketchapp": "^0.11.0"
+  },
+  "devDependencies": {
+    "skpm": "^0.10.2"
+  },
+  "version": "1.3.24"
+}

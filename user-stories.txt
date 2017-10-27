@@ -1,0 +1,55 @@
+Feature: Delete Product
+
+	Scenario: Happy Path
+
+Feature: Get Annonymous Shopping Cart
+
+	Scenario: Happy Path
+
+Feature: Get Shopping Cart
+
+	Scenario: Happy Path
+
+Feature: Proceed to Checkout
+
+	Scenario: Happy Path
+
+	Scenario: Disable shopping cart based on too much stuff
+
+		Some counties do not let you buy too much stuff
+
+
+Feature: Update Product Quantity
+
+	Scenario: Happy Path
+
+	Scenario: Increment
+
+	Scenario: Decrement
+
+	Scenario: Limit quantity per country
+
+		Some countries can't have more than a certain product
+
+	Scenario: Limit total basket price
+
+		China limits the total basket price
+	
+
+Feature: Update Shipping Method 
+
+	Scenario: Happy Path
+
+	Scenario: No Default Shipping Method
+
+		US will not display shipping method unless you put in a zipcode
+
+	Scenario: Default Shipping Method
+
+		Other Countries have default shipping methods
+
+	Scenario: Use Free Shipping
+
+	Scenario: Next Day Shipping
+
+	Scenario: Two Day Shipping
