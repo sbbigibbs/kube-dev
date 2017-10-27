@@ -1,0 +1,19 @@
+{
+  "name": "@iherb/ui-styles-global",
+  "version": "1.3.24",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "tsc"
+  },
+  "types": "dist/index.d.ts",
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^2.4.2"
+  }
+}

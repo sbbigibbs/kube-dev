@@ -1,0 +1,14 @@
+{
+  "name": "@iherb/ui-flag-sprite",
+  "version": "1.3.24",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "babel src --out-dir lib --source-maps"
+  },
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  }
+}

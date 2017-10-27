@@ -1,0 +1,35 @@
+{
+  "name": "@iherb/ecommerce-web",
+  "version": "1.3.24",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  },
+  "dependencies": {
+    "@iherb/ui-entrypoint-web": "^1.3.24"
+  },
+  "devDependencies": {
+    "@iherb/ui-tools-cli": "^1.3.24",
+    "babel-cli": "^6.24.1",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.4.0",
+    "lerna": "^2.0.0-rc.5",
+    "watchify": "^3.9.0"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-register src/*.spec.js",
+    "build": "browserify examples/web/index.js --outfile public/bundle.js --transform [ babelify [ es2015 react stage-0 stage-1 ] ] ",
+    "watch": "watchify src/index.js --outfile public/bundle.js --transform [ babelify [ es2015 react stage-0 stage-1 ] ] --verbose ",
+    "build:webpack": "iherb-ui-tools start --no-start -o ./dist -s ./examples/web/index.js --public ./examples/web/public --html ./examples/web/public/index.html --src examples/web --platforms web",
+    "start": "iherb-ui-tools start -o ./dist -s ./examples/web/index.js --public ./examples/web/public --html ./examples/web/public/index.html --src examples/web --platforms web"
+  }
+}

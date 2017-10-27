@@ -1,0 +1,14 @@
+{
+  "name": "@iherb/ui-api-delete-all-products",
+  "version": "1.3.24",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "babel src --out-dir lib --source-maps"
+  },
+  "author": {
+    "email": "strat.aguilar@iherb.com",
+    "name": "Strat Aguilar",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  }
+}

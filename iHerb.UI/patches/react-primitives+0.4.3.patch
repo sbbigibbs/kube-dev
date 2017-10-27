@@ -1,0 +1,15 @@
+diff --git a/node_modules/react-primitives/lib/modules/Platform.js b/node_modules/react-primitives/lib/modules/Platform.js
+index 1325bdf..9c2a01a 100644
+--- a/node_modules/react-primitives/lib/modules/Platform.js
++++ b/node_modules/react-primitives/lib/modules/Platform.js
+@@ -10,8 +10,8 @@ return obj[Platform.OS];
+ return obj.default;
+ },
+ inject:function inject(platform){
+-Platform.OS=platform.OS;
+-Platform.Version=platform.Version;
++Platform['OS']=platform.OS;
++Platform['Version']=platform.Version;
+ }};
+ 
+ 

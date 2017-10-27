@@ -1,0 +1,52 @@
+diff --git a/node_modules/native-navigation/lib/android/build.gradle b/node_modules/native-navigation/lib/android/build.gradle
+index 055ab09..8a26a4b 100644
+--- a/node_modules/native-navigation/lib/android/build.gradle
++++ b/node_modules/native-navigation/lib/android/build.gradle
+@@ -40,5 +40,5 @@ dependencies {
+   compile 'com.fasterxml.jackson.core:jackson-databind:2.8.3'
+   compile 'com.facebook.fresco:fresco:0.11.0'
+   compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
+-  provided 'com.facebook.react:react-native:+'
++  compile 'com.facebook.react:react-native:+'
+ }
+diff --git a/node_modules/native-navigation/lib/android/src/main/java/com/airbnb/android/react/navigation/NativeNavigationPackage.java b/node_modules/native-navigation/lib/android/src/main/java/com/airbnb/android/react/navigation/NativeNavigationPackage.java
+index 6ffdd9d..3240318 100644
+--- a/node_modules/native-navigation/lib/android/src/main/java/com/airbnb/android/react/navigation/NativeNavigationPackage.java
++++ b/node_modules/native-navigation/lib/android/src/main/java/com/airbnb/android/react/navigation/NativeNavigationPackage.java
+@@ -17,7 +17,7 @@ public class NativeNavigationPackage implements ReactPackage {
+         new NavigatorModule(reactContext, ReactNavigationCoordinator.sharedInstance));
+   }
+ 
+-  @Override public List<Class<? extends JavaScriptModule>> createJSModules() {
++  public List<Class<? extends JavaScriptModule>> createJSModules() {
+     return Collections.emptyList();
+   }
+ 
+diff --git a/node_modules/native-navigation/lib/ios/native-navigation/ReactViewController.swift b/node_modules/native-navigation/lib/ios/native-navigation/ReactViewController.swift
+index 083271e..a40285e 100644
+--- a/node_modules/native-navigation/lib/ios/native-navigation/ReactViewController.swift
++++ b/node_modules/native-navigation/lib/ios/native-navigation/ReactViewController.swift
+@@ -432,7 +432,10 @@ extension ReactViewController : ReactAnimationFromContentVendor {
+     animationContainer.sendSubview(toBack: snapshot.screenWithoutElements.view)
+     return ReactAnimationFromContent(
+       screenWithoutElements: snapshot.screenWithoutElements.view,
+-      sharedElements: snapshot.sharedElements.mapValues { $0.view }
++      sharedElements: snapshot.sharedElements.mapValues(transform: {
++        value in
++        return value.view
++      })
+     )
+   }
+ 
+@@ -449,7 +452,10 @@ extension ReactViewController : ReactAnimationToContentVendor {
+     animationContainer.sendSubview(toBack: snapshot.screenWithoutElements.view)
+     return ReactAnimationToContent(
+       screenWithoutElements: snapshot.screenWithoutElements.view,
+-      sharedElements: snapshot.sharedElements.mapValues { $0.view }
++      sharedElements: snapshot.sharedElements.mapValues(transform: {
++        value in
++        return value.view
++      })
+     )
+   }
+ }

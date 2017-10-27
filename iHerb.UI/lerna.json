@@ -1,0 +1,28 @@
+{
+  "lerna": "2.0.0",
+  "version": "1.3.24",
+  "packages": [
+    "packages/api/*/",
+    "packages/components/*/",
+    "packages/components-sketch/*/",
+    "packages/components-native/*/",
+    "packages/components-web/*/",
+    "packages/collections/*/",
+    "packages/redux-engines/*/",
+    "packages/containers/*/",
+    "packages/containers-web/*/",
+    "packages/pages/*/",
+    "packages/styles/*/",
+    "packages/translations/*/",
+    "packages/entrypoints/*/",
+    "packages/tools/*/",
+    "packages/icons/*/",
+    "packages/selectors/*/",
+    "packages/sagas/*/",
+    "packages/configs/*/",
+    "packages/utils/*/",
+    "packages/user-stories/*/*/",
+    "platforms/*/",
+    "tests/regression/*"
+  ]
+}
