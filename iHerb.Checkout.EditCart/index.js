@@ -1,7 +1,7 @@
 var http = require('http'),
     https = require('https'),
     checksum = require('checksum'),
-    //renderer = require('./dist/render')
+    renderer = require('./lib/render')
     fs = require('fs'),
     path = require('path'),
     React = require('react'),
@@ -20,7 +20,7 @@ var http = require('http'),
 
 var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.biz/v1",
     myaccount = process.env.MYACCOUNT_API_URL || "https://myaccount-api.iherbtest.biz/v1",
-    dev = true;//process.env.CHECKOUT_API_URL && false || true;
+    dev = false;//process.env.CHECKOUT_API_URL && false || true;
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -34,8 +34,8 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
       bundlePath = '/public/bundle.' + sum + '.js';
     }
 
-//var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
-//console.log(temp)
+var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
+console.log(temp)
 
 http.createServer(function(req, res) {
   console.log(req.url);
