@@ -1,7 +1,7 @@
 var http = require('http'),
     https = require('https'),
     checksum = require('checksum'),
-    renderer = require('./lib/render')
+    //renderer = require('./lib/render')
     fs = require('fs'),
     path = require('path'),
     React = require('react'),
