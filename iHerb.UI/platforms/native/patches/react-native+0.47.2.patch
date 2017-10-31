@@ -1,0 +1,26 @@
+diff --git a/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h b/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h
+index 1a0b684..cb70c05 100644
+--- a/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h
++++ b/node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h
+@@ -9,7 +9,7 @@
+ 
+ #import <Foundation/Foundation.h>
+ 
+-#import <RCTAnimation/RCTValueAnimatedNode.h>
++#import "RCTValueAnimatedNode.h"
+ #import <React/RCTBridgeModule.h>
+ #import <React/RCTUIManager.h>
+ 
+diff --git a/node_modules/react-native/Libraries/Performance/Systrace.js b/node_modules/react-native/Libraries/Performance/Systrace.js
+index 8db4ad9..9ac0da2 100644
+--- a/node_modules/react-native/Libraries/Performance/Systrace.js
++++ b/node_modules/react-native/Libraries/Performance/Systrace.js
+@@ -260,7 +260,7 @@ if (__DEV__) {
+   // other files. Therefore, calls to `require('moduleId')` are not replaced
+   // with numeric IDs
+   // TODO(davidaurelio) Scan polyfills for dependencies, too (t9759686)
+-  (require: any).Systrace = Systrace;
++  //(require: any).Systrace = Systrace;
+ }
+ 
+ module.exports = Systrace;

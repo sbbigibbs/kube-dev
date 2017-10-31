@@ -1,0 +1,10 @@
+node_js:
+  script:
+  - npm install
+  - npm test
+  only:
+    - develop
+    - master
+    - /^feature/.*$/
+    - /^hotfix/.*$/
+    - /^support/.*$/

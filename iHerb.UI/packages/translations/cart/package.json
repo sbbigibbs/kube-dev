@@ -1,0 +1,19 @@
+{
+  "name": "@iherb/ui-translations-cart",
+  "version": "1.3.24",
+  "description": "",
+  "main": "lib/",
+  "scripts": {
+    "translate": "iherb-ui-tools-translator ./src -o ./dist -n cart",
+    "prepublish": "babel src -d lib --ignore **/__tests__"
+  },
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@iherb/ui-tools-translator": "^1.3.24"
+  }
+}

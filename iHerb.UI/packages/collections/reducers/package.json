@@ -1,0 +1,22 @@
+{
+  "name": "@iherb/ui-reducers",
+  "version": "1.3.24",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "babel src --out-dir lib --source-maps"
+  },
+  "dependencies": {
+    "@iherb/ui-redux-cart": "^1.3.24",
+    "@iherb/ui-redux-config": "^1.3.24",
+    "@iherb/ui-redux-iherb-ui-component-shipping-methods": "^1.3.24",
+    "@iherb/ui-redux-products": "^1.3.24",
+    "@iherb/ui-redux-wishlist": "^1.3.24",
+    "@iherb/ui-redux-workflow-cart": "^1.3.24"
+  },
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  }
+}

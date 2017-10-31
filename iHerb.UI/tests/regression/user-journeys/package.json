@@ -1,0 +1,25 @@
+{
+  "name": "@iherb/ui-regression-load-page",
+  "version": "1.3.24",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "email": "jonathan.nacionales@iherb.net",
+    "name": "Jonathan Nacionales",
+    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+  },
+  "dependencies": {
+    "@iherb/ui-tool-snapshot-creator": "^1.3.24"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "cross-env": "^5.1.0",
+    "jest": "^21.2.1"
+  },
+  "scripts": {
+    "test": "jest --verbose --notify"
+  },
+  "jest": {
+    "verbose": false
+  }
+}
