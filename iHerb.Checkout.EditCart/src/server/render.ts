@@ -26,7 +26,12 @@ export default (path) => {
         //     ], babelrc: false
         // });
         // var code = transform.code;
-        let code = ts.transpileModule(text, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: 'es2015', } });
+        let code = ts.transpileModule(text, { compilerOptions : { 
+            module: ts.ModuleKind.CommonJS, 
+            target: ts.ScriptTarget.ES2015, 
+            experimentalDecorators: true,
+            jsx: ts.JsxEmit.React 
+        } } );
         return code
         
     }catch(ex) {

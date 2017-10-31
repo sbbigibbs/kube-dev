@@ -34,8 +34,8 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
       bundlePath = '/public/bundle.' + sum + '.js';
     }
 
-var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
-console.log(temp)
+// var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
+// console.log(temp)
 
 http.createServer(function(req, res) {
   console.log(req.url);
