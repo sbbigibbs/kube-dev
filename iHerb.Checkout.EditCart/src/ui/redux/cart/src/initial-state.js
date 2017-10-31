@@ -1,40 +1,34 @@
 import {fromJS} from "immutable"
+/*
+const initialState = {
+    selectedShippingMethod: "382b1428-253f-439a-b376-0619d9ede303",
+    cartItems: {
+        data: {
+            "0aabe5a6-0ca0-41d8-b288-cef6271abca8": {
+                id: "0aabe5a6-0ca0-41d8-b288-cef6271abca8",
+                productId: "2",
+                quantity: 2
+            },
+            "0aabe5a6-0ca0-41d8-b288-cef6271abca9": {
+                id: "0aabe5a6-0ca0-41d8-b288-cef6271abca9",
+                productId: "3",
+                quantity: 1
+            }
+        },
+        orderBy: [
+            "0aabe5a6-0ca0-41d8-b288-cef6271abca8",
+            "0aabe5a6-0ca0-41d8-b288-cef6271abca9"
+        ]
+    }
+}
+*/
 
 const initialState = {
-    cart: {
-        "prodList": [],
-        "discountMsgLst": [],
-        "discountMsgPriceLst": [],
-        "discount": "",
-        "discountPct": "",
-        "totalWeightLbs": "",
-        "prodQty": "",
-        "subTotal": "",
-        "savings": "",
-        "serviceID": 0,
-        "tax": "",
-        "referalCode": "",
-        "rewards": "",
-        "hasCoupon": false,
-        "orderTotal": "",
-        "orderTotalInUSD": "",
-        "specialNote": "",
-        "purchaseErrLst": [],
-        "basketErrLst": [],
-        "basketUrl": "",
-        "appliedCouponsLst": [],
-        "countryDisplayName": "",
-        "countryGeneralDescription": "",
-        "countryShippingDescription": ""
-    },
-    zipcode: "",
-    country: "United States",
-    countryCode: "JP",
-    couponCode: "",
-    countryList: [],
-    requiresZip: true,
-    state: "VALID",
-    promoCodeError: ""
+    selectedShippingMethod: "",
+    cartItems: {
+        data: { },
+        orderBy: [ ]
+    }
 }
 
 export default fromJS(initialState)

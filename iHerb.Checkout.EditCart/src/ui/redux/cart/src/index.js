@@ -1,12 +1,7 @@
-export const actions = require("./actions")
-export const actionTypes = require("./action-types")
-export const initialState = require("./initial-state").default
-export const reducer = require("./reducer").default
+import reducer from "./reducer"
+import initialState from "./initial-state"
 
 export default ({
-    actions,
-    actionTypes,
     initialState,
     reducer
 })
-

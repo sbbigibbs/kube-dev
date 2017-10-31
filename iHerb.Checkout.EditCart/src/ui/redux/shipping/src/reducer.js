@@ -1,5 +1,5 @@
 import initialState from "./initial-state"
-import {actionTypes} from "@iherb/ui-redux-workflow-cart"
+import {actionTypes} from "../../workflow-cart/src/index"
 import {fromJS} from "immutable"
 import {convertToJSX} from "@iherb/ui-util-html-jsx-generator"
 
@@ -25,7 +25,7 @@ function handleUpdateShippingMethods(state, action) {
             toDate,
             desc
         } = method
-        
+
         // const shippingDescriptions = convertToJSX(desc).props.children.map(child => {
         //     return child.props.children[0].props.children
         // })

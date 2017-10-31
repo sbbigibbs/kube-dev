@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es6",
+        "outDir": "./dist",
+        "allowSyntheticDefaultImports": true,
+        "allowJs": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "declaration": false,
+        "jsx": "react",
+        "baseUrl": ".", 
+        "paths": {
+            "iherb-api": ["src/ui/api/index"],
+            "iherb-components": ["src/ui/components/index"],
+            "iherb-containers": ["src/ui/containers/index"],
+            "iherb-redux": ["src/ui/redux/index"],
+            "iherb-sagas": ["src/ui/sagas/index"],
+            "iherb-selectors": ["src/ui/selectors/index"],
+            "iherb-translations": ["src/ui/translations/index"]
+        }
+    },
+    "files": [
+        "./src/Root.tsx"
+    ]
+}

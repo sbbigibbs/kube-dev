@@ -6,6 +6,7 @@ WORKDIR /app
 # This should speed up the build by caching the yarn output unless package.json or yarn.lock is changed
 ADD ./package.json /app/package.json
 ADD ./.npmrc /app/.npmrc
+ADD ./tsconfig.json /app/tsconfig.json
 
 RUN npm install
 # Copy the current directory contents into the container at /app

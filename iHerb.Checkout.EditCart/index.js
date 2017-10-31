@@ -1,7 +1,9 @@
 var http = require('http'),
     https = require('https'),
     checksum = require('checksum'),
+    renderer = require('./dist/render')
     fs = require('fs'),
+    path = require('path'),
     React = require('react'),
     ReactDOMServer = require('react-dom/server'),
     html = React.createElement.bind(null, 'html'), 
@@ -13,16 +15,34 @@ var http = require('http'),
     script = React.createElement.bind(null, 'script');
     //App = React.createFactory(require('./App'))
     
-var bundle = fs.readFileSync('./dist/static/js/bundle.web.js');
-var sum = checksum(bundle);
+//var bundle = fs.readFileSync('./dist/static/js/bundle.web.js');
+//var sum = checksum(bundle);
 
 var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.biz/v1",
-    myaccount = process.env.MYACCOUNT_API_URL || "https://myaccount-api.iherbtest.biz/v1";
+    myaccount = process.env.MYACCOUNT_API_URL || "https://myaccount-api.iherbtest.biz/v1",
+    dev = false;//process.env.CHECKOUT_API_URL && false || true;
+
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+    var bundle,
+        sume,
+        bundlePath = '/public/bundle.js';
+    
+    if(!dev) {
+      bundle = fs.readFileSync('./dist/bundle.web.js');
+      sum = checksum(bundle);
+      bundlePath = '/public/bundle.' + sum + '.js';
+    }
+
+//var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
+//console.log(temp)
 
 http.createServer(function(req, res) {
   console.log(req.url);
 
   if (req.url == '/EditCart') {
+
+
 
     var cookies = parseCookies(req);
     
@@ -31,14 +51,13 @@ http.createServer(function(req, res) {
         language = prefs && prefs['lan'] || 'en-US',
         currency = prefs && prefs['scurcode'] || 'USD',
         country = prefs && prefs['sccode'] || 'US',
-        temp = cookies['ihr-temse'],
-        id = temp && temp['tempses'];
+        temp = cookies['ihr-session-id1'],
+        id = temp && temp['aid'];
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
 
       header(country, language, currency, (headerHtml) => {
         footer(country, language, currency, (footerHtml) => {
-          //console.log(headerHtml),
           //console.log(footerHtml)
           var htmlRes = ReactDOMServer.renderToStaticMarkup(
             html({ className:'USA en shopping-cart mobile-web checkout ios' },
@@ -56,6 +75,8 @@ http.createServer(function(req, res) {
               window._customerId = '${id}';
               window._checkoutAPI = '${checkout}';
               window._myaccountAPI = '${myaccount}';
+              var appPay = false;
+              window.iHerb_ActionHost = 'http://checkout4.iherbtest.com:3000';
             `}}),
 
             script({src: 'https://s.images-iherb.com/js/vendor/jquery-1.11.2.min.js' }),
@@ -71,31 +92,43 @@ http.createServer(function(req, res) {
             
             script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'}),
             script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'}),
-            script({src: '/public/bundle.' + sum +  '.js'}),
-            script({src: 'https://s.images-iherb.com/m/js/app.mobile.min_4c26b94a7311f3ed0519687f2338059e.js'})
+            script({src: bundlePath}),
+            //script({src: 'http://localhost:8080/bundle.web.js'}),
+            script({src: 'https://s.images-iherbtest.com/m/js/app.mobile.min_4c26b94a7311f3ed0519687f2338059e.js'})
           )))
 
           res.end(htmlRes)
         })
       })
 
-  } else if (req.url == '/public/bundle.' + sum + '.js') {
+    } else if (req.url == bundlePath) {
 
     res.setHeader('Content-Type', 'text/javascript')
-    res.end(bundle)
+    if(dev)
+      forwardHttp('localhost:8080/bundle.web.js', '', response => res.end(response))
+    else
+      res.end(bundle)
     
+  } else if (req.url == bundlePath + '.map') {
+    
+        res.setHeader('Content-Type', 'text/javascript')
+        if(dev)
+          forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
+        else
+          res.end()
+        
   } else {
-    //forward(req, response => res.end(response))
-    // res.statusCode = 404
-    // res.end()
+    forward('checkout.iherbtest.com', req, response => res.end(response))
+    //res.statusCode = 404
+    //res.end()
   }
 
 // The http server listens on port 3000
-}).listen(3001, function(err) {
+}).listen(3000, function(err) {
   if (err) throw err
   console.log("Checkout API: " + checkout)
   console.log("MyAccount API: " + myaccount)
-  console.log('Listening on 3001...')
+  console.log('Listening on 3000...')
 })
 
 function parseCookies (request) {
@@ -122,29 +155,69 @@ function parseSubCookies (request) {
   return list;
 }
 
-function forward(req, cb) {
-  const url = 'https://checkout.iherbpreprod.com' + req.url
-  https.get(url, res => {
-    res.setEncoding("utf8");
-    let body = "";
-    res.on("data", data => {
-      body += data;
+function forward(base, req, cb) {
+  
+  const url = base + (req && req.url)
+  var options = {
+    host: base,
+    path: req.url,
+    method: 'GET',
+    headers: req.headers
+  }
+  
+  if(req && req.connection.encrypted){
+    https.get(options, res => {
+      res.setEncoding("utf8");
+      let body = "";
+      res.on("data", data => {
+        body += data;
+      });
+      res.on("end", () => {
+        cb(body);
+      });
     });
-    res.on("end", () => {
-      cb(body);
+  }
+  else {
+    https.get(options, res => {
+      res.setEncoding("utf8");
+      let body = "";
+      res.on("data", data => {
+        body += data;
+      });
+      res.on("end", () => {
+        cb(body);
+      });
     });
+  }
+}
+
+function forwardHttp(base, req, cb) {
+  
+  const url = base + (req && req.url)
+
+  http.get('http://' + url, res => {
+      res.setEncoding("utf8");
+      let body = "";
+      res.on("data", data => {
+        body += data;
+      });
+      res.on("end", () => {
+        cb(body);
+      });
   });
 }
 
 function header(country,  language, currency, cb) {
-  const url = `https://www.iherb.com/content/header?cc=${country}&lc=${language}&curc=${currency}`
+  const url = `https://www.iherbtest.com/content/header?cc=${country}&lc=${language}&curc=${currency}`
   var options = {
-    host: 'www.iherb.com',
+    host: 'www.iherbtest.com',
     port: 443,
     path: `/content/header?cc=${country}&lc=${language}&curc=${currency}`,
     method: 'GET',
     headers: {
-        ['user-agent']: `Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/60`
+      ['Origin']: 'http://checkout4.iherbtest.com:3001',
+      ['Referer']: 'http://checkout4.iherbtest.com:3001',
+      ['user-agent']: `Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/60`
     }
 };
   https.get(options, res => {
@@ -160,13 +233,15 @@ function header(country,  language, currency, cb) {
 }
 
 function footer(country,  language, currency, cb) {
-  const url = `https://www.iherb.com/content/footer?cc=${country}&lc=${language}&curc=${currency}`
+  const url = `https://www.iherbtest.com/content/footer?cc=${country}&lc=${language}&curc=${currency}`
   var options = {
-    host: 'www.iherb.com',
+    host: 'www.iherbtest.com',
     port: 443,
     path: `/content/footer?cc=${country}&lc=${language}&curc=${currency}`,
     method: 'GET',
     headers: {
+        ['Origin']: 'http://checkout4.iherbtest.com:3001',
+        ['Referer']: 'http://checkout4.iherbtest.com:3001',
         ['user-agent']: `Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/60`
     }
 };
