@@ -1,7 +1,7 @@
 var http = require('http'),
     https = require('https'),
     checksum = require('checksum'),
-    cartItem = require('./dist/ui/components/cart-item/src/index')
+    //cartItem = require('./dist/ui/components/cart-item/src/index')
     //renderer = require('./lib/render')
     fs = require('fs'),
     path = require('path'),
