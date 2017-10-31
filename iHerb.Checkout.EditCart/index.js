@@ -1,7 +1,7 @@
 var http = require('http'),
     https = require('https'),
     checksum = require('checksum'),
-    renderer = require('./dist/render')
+    //renderer = require('./dist/render')
     fs = require('fs'),
     path = require('path'),
     React = require('react'),
@@ -20,7 +20,7 @@ var http = require('http'),
 
 var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.biz/v1",
     myaccount = process.env.MYACCOUNT_API_URL || "https://myaccount-api.iherbtest.biz/v1",
-    dev = false;//process.env.CHECKOUT_API_URL && false || true;
+    dev = true;//process.env.CHECKOUT_API_URL && false || true;
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
