@@ -1,6 +1,7 @@
 var http = require('http'),
     https = require('https'),
     checksum = require('checksum'),
+    cartItem = require('./dist/ui/components/cart-item/src/index')
     //renderer = require('./lib/render')
     fs = require('fs'),
     path = require('path'),
@@ -34,8 +35,39 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
       bundlePath = '/public/bundle.' + sum + '.js';
     }
 
-// var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
-// console.log(temp)
+//var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
+
+// console.log(ReactDOMServer.renderToStaticMarkup(
+//   React.createElement(
+//     cartItem.default.Component, {
+//       imageSource: '',
+//       title: '',
+//       productId: '',
+//       weight: '',
+//       discountMsgList:[],
+//       price: '',
+//       quantity: '',
+//       discountsAppliedList:[],
+//       total: '',
+//       totalDiscount: '',
+//       onIncrement: () => {},
+//       onDecrement: () => {},
+//       onRequestProductQuantityChange: () => {},
+//       onCreateChangeProductQuantity: () => {},
+//       onDeleteProduct: () => {},
+//       onPostToWishlist: () => {},
+//       errorMsgList:[],
+//       labels:{
+//         weight: "",
+//         each: "",
+//         addToList: () => {},
+//         removeButton: () => {},
+//         weightLbs: [],
+//         weightKg: "" 
+//       },
+//       weightKg: [],
+//       isDiscontinued: false
+//     })))
 
 http.createServer(function(req, res) {
   console.log(req.url);
@@ -116,12 +148,12 @@ http.createServer(function(req, res) {
           forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
         else
           res.end()
-        
-  } else {
-    forward('checkout.iherbtest.com', req, response => res.end(response))
-    //res.statusCode = 404
-    //res.end()
   }
+  // } else {
+  //   forward('checkout.iherbtest.com', req, response => res.end(response))
+  //   //res.statusCode = 404
+  //   //res.end()
+  // }
 
 // The http server listens on port 3000
 }).listen(3000, function(err) {
@@ -166,7 +198,8 @@ function forward(base, req, cb) {
   }
   
   if(req && req.connection.encrypted){
-    https.get(options, res => {
+    console.log('encrypted')
+    http.get(options, res => {
       res.setEncoding("utf8");
       let body = "";
       res.on("data", data => {
@@ -178,7 +211,7 @@ function forward(base, req, cb) {
     });
   }
   else {
-    https.get(options, res => {
+    http.get(options, res => {
       res.setEncoding("utf8");
       let body = "";
       res.on("data", data => {

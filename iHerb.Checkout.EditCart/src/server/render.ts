@@ -32,7 +32,8 @@ export default (path) => {
             experimentalDecorators: true,
             jsx: ts.JsxEmit.React 
         } } );
-        return code
+
+        return eval(code.outputText)
         
     }catch(ex) {
         var exception = ex;

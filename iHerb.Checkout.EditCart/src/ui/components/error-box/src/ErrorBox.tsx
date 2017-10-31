@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { View, Text, Image, StyleSheet, Touchable, Platform } from 'react-primitives';
 import { convertToJSX } from '@iherb/ui-util-html-jsx-generator'
 import { styles } from "./styles/error-box"

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ts": "cd ./src/server && tsc -w",
+    "ts": "tsc -w",
     "build": "node ./src/build/cli/index.js -o ./dist -e iherb ./src/Root.tsx",
     "dev": "node ./src/build/cli/index.js --dev -o ./public -e iherb ./src/Root.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
