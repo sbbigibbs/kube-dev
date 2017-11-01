@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from 'react-primitives';
-import TextInput from "@iherb/react-primitive-text-input";
+//import TextInput from "@iherb/react-primitive-text-input";
 import { styles } from './styles/shipping-estimates'
 
 export default (props) => {
@@ -28,7 +28,7 @@ export default (props) => {
         <Text style={styles.black}>Please type in your zip code and click on 'Calculate'.</Text>
         <View style={styles.actions}>
             
-            <TextInput style={styles.textInput}
+            <input type={'text'} style={styles.textInput}
                 onChangeText={onChangeZipCode}
                 value={zipcode} />
                 

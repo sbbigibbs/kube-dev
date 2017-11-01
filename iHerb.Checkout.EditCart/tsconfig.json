@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2015",
+        "module": "esnext",
+        "target": "es6",
         "outDir": "./dist",
         "allowSyntheticDefaultImports": true,
         "allowJs": true,
@@ -17,7 +17,8 @@
             "iherb-redux": ["src/ui/redux/index"],
             "iherb-sagas": ["src/ui/sagas/index"],
             "iherb-selectors": ["src/ui/selectors/index"],
-            "iherb-translations": ["src/ui/translations/index"]
+            "iherb-translations": ["src/ui/translations/index"],
+            "iherb-primitives": ["src/ui/primitives/index"]
         }
     },
     "files": [

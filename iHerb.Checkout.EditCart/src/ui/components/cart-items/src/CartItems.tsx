@@ -1,6 +1,5 @@
 import React from "react"
 import {View, Text, StyleSheet} from "react-primitives"
-import {Button} from "react-native"
 import CartItem from "../../cart-item/src/index"
 import ErrorBox from "../../error-box/src/index"
 import { styles } from "./styles/cart-items"

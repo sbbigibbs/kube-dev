@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from 'react-primitives';
-import TextInput from "@iherb/react-primitive-text-input";
+//import TextInput from "@iherb/react-primitive-text-input";
 import { styles } from "./styles/promo-code"
 
 export default (props) => {
@@ -19,7 +19,7 @@ export default (props) => {
         <Text style={styles.savings}>{labels.savings} ({savings})</Text>
         <Text>{labels.applyPromo}</Text>
         <View style={styles.actions}>
-            <TextInput style={styles.textInput}
+            <input type={'text'} style={styles.textInput}
                 onChangeText={onChangeCouponCode}
                 value={couponCode} />
 
