@@ -17,6 +17,7 @@ class Text extends React.Component {
     const resolvedStyle = StyleSheet.resolve(passedStyle, TEXT_CLASSNAME);
 
     const props = {
+      onClick: this.props.onPress,
       className: resolvedStyle.className,
       style: resolvedStyle.style,
       children: this.props.children,
@@ -43,7 +44,7 @@ class Text extends React.Component {
       });
     }
 
-  return <span {...props}></span> 
+  return <span  {...props}></span> 
   }
 }
 
