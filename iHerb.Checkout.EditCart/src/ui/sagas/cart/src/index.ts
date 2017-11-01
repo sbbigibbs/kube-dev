@@ -88,8 +88,8 @@ export function* changeProductQuantityHandler(action) {
     try {
         const {productId, quantity} = action.payload
         const config = yield select( (state:any) => state.config )
-        const loginToken = action.payload.loginToken//config.get("loginToken")
-        const checkoutApi = action.payload.checkoutApi//config.get("checkoutApi")
+        const loginToken = config.get("loginToken")
+        const checkoutApi = config.get("checkoutApi")
         const header = {
             ihPref: "lc=en-US;ctc=JP;cc=USD"
         }
@@ -122,8 +122,8 @@ export function* updateShippingMethodHandler(action) {
     try {
         const {shippingId} = action.payload
         const config = yield select( (state:any) => state.config )
-        const loginToken = action.payload.loginToken//config.get("loginToken")
-        const checkoutApi = action.payload.checkoutApi//config.get("checkoutApi")
+        const loginToken = config.get("loginToken")
+        const checkoutApi = config.get("checkoutApi")
         const header = {
             ihPref: "lc=en-US;ctc=JP;cc=USD"
         }
@@ -215,8 +215,8 @@ export function* applyCouponCodeHandler(action) {
     try {
         const {couponCode} = action.payload
         const config = yield select( (state:any) => state.config )
-        const loginToken = action.payload.loginToken//config.get("loginToken")
-        const checkoutApi = action.payload.checkoutApi//config.get("checkoutApi")
+        const loginToken = config.get("loginToken")
+        const checkoutApi = config.get("checkoutApi")
         const header = {
             ihPref: "lc=en-US;ctc=JP;cc=USD"
         }
@@ -255,8 +255,8 @@ export function* deleteCouponCodeHandler(action) {
     try {
         const {couponCode} = action.payload
         const config = yield select( (state:any) => state.config )
-        const loginToken = action.payload.loginToken//config.get("loginToken")
-        const checkoutApi = action.payload.checkoutApi//config.get("checkoutApi")
+        const loginToken = config.get("loginToken")
+        const checkoutApi = config.get("checkoutApi")
         const header = {
             ihPref: "lc=en-US;ctc=JP;cc=USD"
         }

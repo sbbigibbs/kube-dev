@@ -1,10 +1,10 @@
 import request from "superagent"
 
-export const UpdateShippingMethodService = (loginToken, checkoutApiUrl, header = {}) =>
+export const UpdateShippingMethodService = (anonymousToken, checkoutApiUrl, header = {}) =>
     (shippingId) =>
         new Promise((resolve, reject) => request
             .put(`${checkoutApiUrl}/ec/usm?servID=${shippingId}`)
-            .set("LoginToken", loginToken)
+            .set("AnonymousToken", anonymousToken)
             .set("iH-Pref", header.ihPref || "lc=en-US;ctc=KR;cc=USD")
             .end((error, response) => error
                 ? reject({error})
