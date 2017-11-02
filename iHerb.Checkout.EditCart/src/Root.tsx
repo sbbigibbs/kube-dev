@@ -80,13 +80,16 @@ const myAccountApi = _myaccountAPI
 const loginToken = _customerId;
 const language = _language;
 const country = _country;
+const currency = _currency;
 
 export const {
   log, 
   store
 } = run({
-  checkoutApi,
-  myAccountApi,
-  loginToken,
-  language
+    checkoutApi,
+    myAccountApi,
+    loginToken,
+    language,
+    country,
+    currency
 })
