@@ -12,7 +12,9 @@ export const run = (props) => {
         checkoutApi,
         myAccountApi,
         loginToken,
-        language
+        language,
+        currency,
+        country
     } = props
 
     const sagaMiddleware = createSagaMiddleware()
@@ -55,6 +57,8 @@ export const run = (props) => {
         myAccountApi,
         loginToken,
         language,
+        currency,
+        country
     }))
 
     return {
@@ -67,12 +71,15 @@ declare var _checkoutAPI: any;
 declare var _myaccountAPI: any;
 declare var _customerId: any;
 declare var _language: any;
+declare var _currency: any;
+declare var _country: any;
 
 const ugcToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiNGQ2NjM2ODUtMDVkMy00NjFkLTliOTItNWNiNzAxOGYyNTBkIiwibmJmIjoxNTA4Mjc1OTMxLCJleHAiOjE1MDg4ODA3MzEsImlzcyI6IlVHQ0FwaSJ9.X44YzGP3CAplg0pzFAoL1AJL353KYsl9nVY2DkLGdWU"
 const checkoutApi = _checkoutAPI
 const myAccountApi = _myaccountAPI
 const loginToken = _customerId;
 const language = _language;
+const country = _country;
 
 export const {
   log, 

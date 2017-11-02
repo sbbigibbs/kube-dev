@@ -3,6 +3,8 @@ import initialState from "./initial-state"
 const callbacks = {
     "workflow-cart/LOAD_PAGE": (state, action) => state
         .set("language", action.payload.language)
+        .set("currency", action.payload.currency)
+        .set("country", action.payload.country)
         .set("checkoutApi", action.payload.checkoutApi)
         .set("myAccountApi", action.payload.myAccountApi)
         .set("loginToken", action.payload.loginToken),

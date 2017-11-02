@@ -26,8 +26,11 @@ export function* loadPageHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = action.payload.loginToken//config.get("loginToken")
         const checkoutApi = action.payload.checkoutApi//config.get("checkoutApi")
+        const language = action.payload.language
+        const currency = action.payload.currency
+        const country = action.payload.country
         const header = {
-            ihPref: "lc=en-US;ctc=JP;cc=USD"
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
         }
         const {data} = yield call(GetAnonymousShoppingCartService(
             loginToken,
@@ -57,8 +60,11 @@ export function* getShippingMethodsHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
         const header = {
-            ihPref: "lc=en-US;ctc=JP;cc=USD"
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
         }
 
         const response = yield call(GetShippingMethodsService(
@@ -90,8 +96,11 @@ export function* changeProductQuantityHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
         const header = {
-            ihPref: "lc=en-US;ctc=JP;cc=USD"
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
         }
 
         const {data} = yield call(UpdateProdQtyService(
@@ -124,8 +133,11 @@ export function* updateShippingMethodHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
         const header = {
-            ihPref: "lc=en-US;ctc=JP;cc=USD"
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
         }
 
         yield call(UpdateShippingMethodService(
@@ -158,6 +170,12 @@ export function* deleteProductHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
+        const header = {
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
+        }
 
         const {data} = yield call(DeleteProductService(
             loginToken,
@@ -217,8 +235,11 @@ export function* applyCouponCodeHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
         const header = {
-            ihPref: "lc=en-US;ctc=JP;cc=USD"
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
         }
 
         const couponData = yield call(ApplyCouponCodeService(
@@ -257,8 +278,11 @@ export function* deleteCouponCodeHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
         const header = {
-            ihPref: "lc=en-US;ctc=JP;cc=USD"
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
         }
 
         yield call(DeleteCouponService(
@@ -291,6 +315,12 @@ export function* getCountryListHandler(action) {
         const config = yield select( (state:any) => state.config )
         const loginToken = config.get("loginToken")
         const myAccountApi = config.get("myAccountApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
+        const header = {
+            ihPref: `lc=${language};ctc=${country};cc=${currency}`
+        }
 
         const {data} = yield call(GetCountryListService(
             loginToken,
