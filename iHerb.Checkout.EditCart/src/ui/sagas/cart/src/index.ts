@@ -179,7 +179,8 @@ export function* deleteProductHandler(action) {
 
         const {data} = yield call(DeleteProductService(
             loginToken,
-            checkoutApi
+            checkoutApi, 
+            header
         ), productId)
         yield put(actions.loadShoppingCart(data))
     }
@@ -244,7 +245,8 @@ export function* applyCouponCodeHandler(action) {
 
         const couponData = yield call(ApplyCouponCodeService(
             loginToken,
-            checkoutApi
+            checkoutApi,
+            header
         ), couponCode)
 
         if(couponData.data.errMsg)
@@ -287,7 +289,8 @@ export function* deleteCouponCodeHandler(action) {
 
         yield call(DeleteCouponService(
             loginToken,
-            checkoutApi
+            checkoutApi,
+            header
         ), couponCode)
 
         const {data} = yield call(GetAnonymousShoppingCartService(
