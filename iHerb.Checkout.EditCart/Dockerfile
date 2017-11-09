@@ -31,4 +31,4 @@ RUN npm run build
 #RUN find . -type f -exec sed -i 's/\x0d//g' {} \+
 
 EXPOSE 3000
-CMD [ ./run.sh ]
+CMD [ "bash", "./run.sh" ]
