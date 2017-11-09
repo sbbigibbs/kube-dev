@@ -218,6 +218,8 @@ http.createServer(function(req, res) {
           forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
         else
           res.end()
+  } else if(req.url.split('?')[0] =="/info") {
+    forwardHttp('localhost:8080/info', '', response => res.end(response))
   }
   // } else {
   //   forward('checkout.iherbtest.com', req, response => res.end(response))
