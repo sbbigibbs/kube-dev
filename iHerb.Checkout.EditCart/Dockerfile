@@ -7,12 +7,14 @@ WORKDIR /app
 ADD ./package.json /app/package.json
 ADD ./.npmrc /app/.npmrc
 ADD ./tsconfig.json /app/tsconfig.json
+ADD ./run.sh /app/run.sh
 
 RUN npm install
 # Copy the current directory contents into the container at /app
 ADD . /app
 
-RUN npm run dev
+RUN npm run build
+RUN /run.sh
 #ENV CART_API_URL https://checkout-api.iherb.biz/
 #ENV CART_API_URL https://checkout-api.iherbtest.biz/
 
@@ -29,4 +31,4 @@ RUN npm run dev
 #RUN find . -type f -exec sed -i 's/\x0d//g' {} \+
 
 EXPOSE 3000
-CMD [ "node", "./index.js" ]
+CMD [ "" ]
