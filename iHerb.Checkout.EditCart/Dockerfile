@@ -12,7 +12,7 @@ RUN npm install
 # Copy the current directory contents into the container at /app
 ADD . /app
 
-RUN npm run build
+RUN npm run dev
 #ENV CART_API_URL https://checkout-api.iherb.biz/
 #ENV CART_API_URL https://checkout-api.iherbtest.biz/
 

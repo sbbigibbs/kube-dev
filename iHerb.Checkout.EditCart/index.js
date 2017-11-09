@@ -37,7 +37,7 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
       bundle = fs.readFileSync('./dist/bundle.web.js');
       sum = checksum(bundle);
       bundlePath = '/public/bundle.' + sum + '.js';
-    }
+    } 
 
 //var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
 
