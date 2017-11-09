@@ -14,7 +14,7 @@ RUN npm install
 ADD . /app
 
 RUN npm run build
-RUN /run.sh
+
 #ENV CART_API_URL https://checkout-api.iherb.biz/
 #ENV CART_API_URL https://checkout-api.iherbtest.biz/
 
@@ -31,4 +31,4 @@ RUN /run.sh
 #RUN find . -type f -exec sed -i 's/\x0d//g' {} \+
 
 EXPOSE 3000
-CMD [ "" ]
+CMD [ ./run.sh ]
