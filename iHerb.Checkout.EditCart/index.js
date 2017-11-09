@@ -25,7 +25,7 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
     content = process.env.CONTENT_URL || "https://www.iherbtest.com/content",
     host = content.match(/\S+(?=\/\S+$)/g)[0].split('https://')[1];
     
-    dev = false;//process.env.CHECKOUT_API_URL && false || true;
+    dev = true;//process.env.CHECKOUT_API_URL && false || true;
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
