@@ -218,9 +218,12 @@ http.createServer(function(req, res) {
           forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
         else
           res.end()
-  } else if(req.url.split('?')[0] =="/info") {
-    forwardHttp('localhost:8080/info', '', response => res.end(response))
-  }
+  } //else if(req.url.split('/')[1] =="public") {
+  //   console.log(req.url)
+  //   req.url = req.url.split('public')[1];
+  //   req.host = 'localhost'
+  //   forward('localhost', req, response => res.end(response))
+  // }
   // } else {
   //   forward('checkout.iherbtest.com', req, response => res.end(response))
   //   //res.statusCode = 404
@@ -268,10 +271,10 @@ function forward(base, req, cb) {
     method: 'GET',
     headers: req.headers
   }
+
+  console.log(options)
   
-  if(req && req.connection.encrypted){
-    console.log('encrypted')
-    http.get(options, res => {
+    http.get(req, res => {
       res.setEncoding("utf8");
       let body = "";
       res.on("data", data => {
@@ -281,24 +284,13 @@ function forward(base, req, cb) {
         cb(body);
       });
     });
-  }
-  else {
-    http.get(options, res => {
-      res.setEncoding("utf8");
-      let body = "";
-      res.on("data", data => {
-        body += data;
-      });
-      res.on("end", () => {
-        cb(body);
-      });
-    });
-  }
+  
 }
 
 function forwardHttp(base, req, cb) {
   
   const url = base + (req && req.url)
+
 
   http.get('http://' + url, res => {
       res.setEncoding("utf8");

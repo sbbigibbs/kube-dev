@@ -17,7 +17,7 @@ function getEntry(name, src, dev) {
     if(dev) {
         entry[name].push('babel-polyfill'),
         entry[name].push('react-hot-loader/patch');
-        entry[name].push('webpack-dev-server/client?https://checkout4.iherbtest.com/public');
+        entry[name].push('webpack-dev-server/client?http://localhost:8080'); //http://checkout4.iherbtest.com:3000/public');
         entry[name].push('webpack/hot/only-dev-server');
     } else {
         entry[name].push('babel-polyfill')
@@ -59,7 +59,7 @@ function build(src, output, modules, dev, watch) {
             hot: true,
             hotOnly: true,
             inline: true,
-            host: 'checkout4.iherbtest.com',
+            host: 'localhost',
             port: 8080
         }
         
