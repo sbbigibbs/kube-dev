@@ -1,11 +1,14 @@
-import request from "superagent";
+import 'whatwg-fetch'
 
-export const GetShoppingCartService = (loginToken, checkoutApiUrl, header = {}) => 
+export const GetShoppingCartService = (anonymousToken, loginToken, checkoutApiUrl, header = {}) => 
     (zipcode, countryCode) => 
-        new Promise((resolve, reject) => request
-            .get(`${checkoutApiUrl}/ec/gsc`)
-            .set("LoginToken", loginToken)
-            .set("iH-Pref", header.ihPref || "lc=en-US;ctc=JP;cc=USD")
-            .end((error, response) => error 
-                ? reject({error}) 
-                : resolve({data: response.body})))
+        new Promise((resolve, reject) => fetch(`${checkoutApiUrl}/ec/gsc`, {
+          method: 'GET',
+          headers: {
+            'LoginToken': loginToken,
+            'IH-Pref': header.ihPref || "lc=en-US;ctc=JP;cc=USD"
+          }
+        }).then(response => response.json())
+          .then(json => resolve({data: json}))
+          .catch(error => reject({error})
+        ))

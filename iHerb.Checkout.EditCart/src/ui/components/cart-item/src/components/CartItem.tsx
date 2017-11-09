@@ -75,7 +75,7 @@ export default class CartItem extends React.Component {
 
     const ProductPrice = () => <View style={styles.productPrice}>
       <Text style={styles.total}>{total}</Text>
-      <Text>{labels.each} {price})</Text>
+      <Text style={styles.each}>{labels.each} {price})</Text>
     </View>
 
     const handleChange = (event, index, value) => {
@@ -88,30 +88,38 @@ export default class CartItem extends React.Component {
     }
 
     return (
-      <View>
-        <View style={styles.lineItem}>
-          {errorMsgList.map((error, index) => {
-            return <ErrorBox key={index} isCartError={false} errorMessage={error} />
-          })}
+      <View style={styles.root}>
+        <View style={styles.lineItemError}>
+          {errorMsgList.map((error, i) => {
+            return <ErrorBox key={i} isCartError={false} errorMessage={error} />
+          })} 
         </View>
-        <View style={styles.root}>
+        <View style={styles.title}>
+          <ProductTitle />
+        </View>
+        <View style={styles.lineItem}>
           <View style={styles.image}>
             <ProductImage />
             <Weight />
           </View>
           <View style={styles.details}>
-            <View style={styles.title}>
-              <ProductTitle />
-            </View>
             <View style={styles.pricing}>
-              <View style={styles.price}><ProductPrice /></View>
               <View style={styles.quantityContainer}>
                 <MuiThemeProvider>
-                <DropDownMenu style={dropdownStyles.customStyle} labelStyle={dropdownStyles.customLabel} iconStyle={dropdownStyles.customIcon} underlineStyle={dropdownStyles.customUnderline} menuStyle={dropdownStyles.customMenu} menuItemStyle={dropdownStyles.customMenuItem} selectedMenuItemStyle={dropdownStyles.customSelectedItem} autoWidth={false} value={parseInt(quantity)} onChange={handleChange}>
+                <DropDownMenu autoWidth={false} 
+                              value={parseInt(quantity)} 
+                              onChange={handleChange} 
+                              underlineStyle={{display: 'none'}}
+                              maxHeight={200}
+                              labelStyle={dropdownStyles.customLabel}
+                              iconStyle={dropdownStyles.customIconStyle}
+                              menuStyle={dropdownStyles.dropdownDisplay}
+                              selectedMenuItemStyle={dropdownStyles.customSelectedMenuItemStyle}>
                   {items}
                 </DropDownMenu>
                 </MuiThemeProvider>
               </View>
+              <ProductPrice />
             </View>
             {discontinuedElement}
             {promoElement}

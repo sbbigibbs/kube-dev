@@ -1,5 +1,6 @@
 var http = require('http'),
     https = require('https'),
+    chokidar = require('chokidar'),
     checksum = require('checksum'),
     //cartItem = require('./dist/ui/components/cart-item/src/index')
     //renderer = require('./lib/render')
@@ -21,7 +22,7 @@ var http = require('http'),
 
 var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.biz/v1",
     myaccount = process.env.MYACCOUNT_API_URL || "https://myaccount-api.iherbtest.biz/v1",
-    content = process.env.CONTENT_URL || "https://www.iherb.com/content",
+    content = process.env.CONTENT_URL || "https://www.iherbtest.com/content",
     host = content.match(/\S+(?=\/\S+$)/g)[0].split('https://')[1];
     
     dev = false;//process.env.CHECKOUT_API_URL && false || true;
@@ -72,8 +73,72 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
 //       isDiscontinued: false
 //     })))
 
+
+// chokidar.watch('./src/ui').on('change', (path, stats) => {
+//   //console.log(path, stats);
+//   var content = fs.readFileSync(path, 'utf8');
+
+//   updateContent(JSON.stringify({
+//     path,
+//     content
+//   }))
+// });
+
+// function updateContent(content) {
+  
+//   var options = {
+//     hostname:'checkout4.iherbtest.com',
+//     port: 3000,
+//     path: '/update',
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//       'Content-Length': content.length
+//     }
+//   }
+
+//   var req = http.request(options, res => {
+//       res.setEncoding("utf8");
+//       let body = "";
+//       res.on("data", data => {
+//         body += data;
+//       });
+//       res.on("end", () => {
+//         console.log(body)
+//       })
+//   });
+
+//   req.on('error', (e) => {
+//     console.error(e)
+//   })
+
+//   req.write(content);
+//   req.end();
+// }
+
 http.createServer(function(req, res) {
   console.log(req.url);
+  
+  if (req.url == '/update') {
+    let body = "";
+
+    req.setEncoding("utf8");
+    req.on("data", data => {
+      body += data;
+    });
+
+    req.on("end", () => {
+      body = JSON.parse(body);
+
+      var content = fs.readFileSync(body.path, 'utf8');
+      if(checksum(content) !== checksum(body.content)) {
+        fs.writeFileSync(body.path, body.content)
+        res.end('changed');
+      } else {
+        res.end('not changed');
+      }
+    });
+  }
 
   if (req.url == '/EditCart') {
 

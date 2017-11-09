@@ -18,7 +18,9 @@
             "iherb-sagas": ["src/ui/sagas/index"],
             "iherb-selectors": ["src/ui/selectors/index"],
             "iherb-translations": ["src/ui/translations/index"],
-            "iherb-primitives": ["src/ui/primitives/index"]
+            "iherb-primitives": ["src/ui/primitives/index"],
+            "iherb-middleware": ["src/ui/middleware/src/index"],
+            "iherb-pages": ["src/ui/pages/index"]
         }
     },
     "files": [

@@ -1,22 +1,12 @@
+
 export const styles = {
+    shippingSection: {
+        marginTop: 20
+    },
   input: {
       borderColor: "#000",
       borderWidth: 1,
       width: 200
-  },
-  checkout: {
-      marginTop: 8,
-      padding: 8,
-      color: "#fff",
-      borderWidth: 1,
-      borderColor: "#000",
-      backgroundColor: "#999",
-      width: 200
-  },
-  text: {
-      fontWeight: 'bold',
-      fontSize: 8,
-      textAlign: 'center'
   },
   country: {
       color: "#ff8a00",
@@ -24,9 +14,8 @@ export const styles = {
   },
   root: {
       flexDirection: "column",
-      paddingTop: 15,
-      paddingBottom: 15,
-      //color: "#000000"
+      paddingLeft: 12,
+      color: "#000000"
   },
   destination: {
       marginTop: 8,
@@ -37,26 +26,32 @@ export const styles = {
       textDecorationLine: "underline"
   },
   actions: {
-      flex: 1,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      //alignItems: "space-between",
-      marginTop: 10,
-      maxWidth: 320
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "space-between",
+    marginTop: 10,
+    marginRight: 10,
+    marginBottom: 15
   },
   textInput: {
-      width: 200,
-      height: 32,
-      borderWidth: 1,
-      borderColor: "#cccccc",
-      padding: 5
+    flex: 2,
+    height: 42,
+    borderWidth: 1,
+    borderColor: "#c6c6c6",
+    borderStyle: 'solid',
+    padding: 5
   },
   button: {
-      flex: 1,
-      backgroundColor: "#ededed",
-      justifyContent: "center",
-      alignItems: "center",
-      marginLeft: 10
+    flex: 1,
+    backgroundColor: "#f38a00",
+    color: '#ffffff',
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 10,
+    cursor: "pointer",
+    height: 42,
+    fontSize: 16
   },
   blackBold: {
     color: "#000000",
@@ -70,5 +65,40 @@ export const styles = {
   },
   black: {
     color: "#000000"
-  }
+  },
+  grey14: {
+      color: '#747474'
+  },
+  attribute: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: '#dfdfdf',
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingRight: 10
+  },
+  attributeNoBorder: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingRight: 10
+  },
+  label:{
+    fontSize: 14,
+    color: '#000000'
+  },
+  weight: {
+    fontSize: 11,
+    color: '#747474',
+    fontWeight: 'bold'
+},
+    value: { 
+      color: "#000000",
+      fontWeight: "bold"
+    },
 }

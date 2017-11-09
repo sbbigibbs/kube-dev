@@ -9,10 +9,13 @@ const workflowCart = state => state.workflowCart
 
 const config = state => state.config
 
+const wishlist = state => state.wishlist
+
 export default {
     cart,
     products,
     shippingMethods,
     workflowCart,
-    config
+    config,
+    wishlist
 }

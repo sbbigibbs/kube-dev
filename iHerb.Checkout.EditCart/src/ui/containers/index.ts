@@ -4,6 +4,10 @@ import OrderSummary from './order-summary/src/index'
 import PromoCode from './promo-code/src/index'
 import ShippingEstimates from './shipping-estimates/src/index'
 import ShippingMethods from './shipping-methods/src/index'
+import CountryList from './country-list/src/CountryList'
+import Navigation from './navigation/src'
+import Wishlist from './wishlist/src/index'
+//import WishlistBox from './wishlist-box/src/index'
 
 export default {
     Cart,
@@ -11,5 +15,9 @@ export default {
     OrderSummary,
     PromoCode,
     ShippingEstimates,
-    ShippingMethods
+    ShippingMethods,
+    CountryList,
+    Navigation,
+    Wishlist,
+    //WishlistBox
 }

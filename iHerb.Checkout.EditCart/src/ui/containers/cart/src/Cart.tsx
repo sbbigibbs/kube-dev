@@ -5,6 +5,7 @@ import ShippingMethods from "../../shipping-methods/src/index"
 import CartItems from "../../cart-items/src/index"
 import ShippingEstimates from "../../shipping-estimates/src/index"
 import PromoCode from "../../promo-code/src/index"
+import {connectAdvanced} from "react-redux"
 
 const styles = {
     page: {
@@ -13,9 +14,24 @@ const styles = {
     cart: {
         maxWidth: 1400,
         marginLeft: "auto",
-        marginRight: "auto",
-        paddingLeft: 15,
-        paddingRight: 15
+        marginRight: "auto"
+    },
+    cartEmpty: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20
+    },
+    cartEmptyHeader: {
+        fontFamily: 'Lato',
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5
+    },
+    cartEmptysubtitle: {
+        fontFamily: 'Lato',
+        fontSize: 14,
+        color: '#676767',
+        textAlign: 'center'
     },
     shippingSummary: {
         flex: 1,
@@ -36,26 +52,33 @@ const styles = {
         flex: 1,
         
     },
-    
-    
 }
 
-export default () => <View style={styles.cart}>
-    <View>
-        <CartItems />
-        
-        <View style={styles.shippingSummary}>
-            <View style={styles.shipping}>
-                <PromoCode/>
-                <ShippingEstimates />
-                <ShippingMethods />
+export const Cart = ({isEmpty}) => {
+    if(isEmpty)
+        return <View style={styles.cartEmpty}>
+            <i className="icon-cart"></i>
+            <View style={styles.cartEmptyHeader}>
+                <Text style={styles.cartEmptyHeader}>Your Shopping Cart is Empty</Text>
             </View>
-            <View style={styles.summary}>
-                <OrderSummary />
+            <View style={styles.cartEmptysubtitle}>
+                <Text style={styles.cartEmptysubtitle}>Shop 35,000+ Top Brand Healthy Products and receive Best Overall Savings for Orders over $40 USD.</Text>
             </View>
-            
         </View>
+
+    return <View style={styles.cart}>
+        <CartItems />
+        <PromoCode/>
+        <OrderSummary />
+        <ShippingEstimates />
+        <ShippingMethods />
     </View>
-    
-   
-</View>
+}
+
+const selectorFactory = dispatch => state => {
+    return {
+        isEmpty: (state.cart.getIn(["cartItems", "orderBy"]).size === 0)
+    }
+}
+
+export default connectAdvanced(selectorFactory)(Cart)

@@ -96,6 +96,10 @@ export const deleteProductFromCart = (productId) => ({
     }
 })
 
+export const deleteAllProductsFromCart = () =>({
+    type: actionType.REMOVE_ALL_PRODUCTS
+});
+
 export const postWishList = (productId) => ({
     type: actionType.POST_TO_WISHLIST,
     payload: {
@@ -161,4 +165,62 @@ export const getPromoError = errorMsg => ({
 
 export const clearPromoError = () => ({
     type: actionType.CLEAR_PROMO_ERRORS
+})
+
+export const getRecommendations = () => ({
+    type: actionType.GET_RECOMMENDATIONS
+})
+
+export const loadRecommendations = (prodList) => ({
+    type: actionType.LOAD_RECOMMENDATIONS,
+    payload: {
+        prodList
+    }
+})
+
+export const getWishlist = (folderName = 'Home') => ({
+  type: actionType.GET_WISHLIST,
+  payload: {
+    folderName
+  }
+})
+
+export const displayWishlist = () => ({
+  type: actionType.DISPLAY_WISHLIST
+})
+
+export const loadWishlist = (wishListData) => ({
+  type: actionType.LOAD_WISHLIST,
+  payload: {
+    wishListData
+  }
+})
+
+export const displayWishlistSelection = () => ({
+  type: actionType.DISPLAY_WISHLIST_SELECTION
+})
+
+export const selectWishlist = (folderName) => ({
+  type: actionType.SELECT_WISHLIST,
+  payload: {
+    folderName
+  }
+})
+
+export const toggleShipping = () => ({
+  type: actionType.TOGGLE_SHIPPING
+})
+
+export const toggleTab = (tab) => ({
+  type: actionType.TOGGLE_TAB,
+  payload: {
+    tab
+  }
+})
+
+export const refreshShoppingCart = (ihPref) => ({
+    type: actionType.REFRESH_SHOPPING_CART,
+    payload: {
+        ihPref
+    }
 })

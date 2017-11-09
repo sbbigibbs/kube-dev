@@ -6,5 +6,10 @@ export const labels = {
     weightLbs: "weightLbs",
     totalWeightColon: "totalWeightColon",
     destination: "destination",
-    change: "change"
+    change: "change",
+    shippingColon: "shippingColon",
+    taxColon: "taxColon",
+    rewardsColon: "rewardsColon",
+    totalColon: "totalColon",
+    ttlCheckout: "ttlCheckout"
 }

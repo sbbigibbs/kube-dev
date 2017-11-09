@@ -7,6 +7,7 @@ const callbacks = {
         .set("country", action.payload.country)
         .set("checkoutApi", action.payload.checkoutApi)
         .set("myAccountApi", action.payload.myAccountApi)
+        .set("anonymousToken", action.payload.anonymousToken)
         .set("loginToken", action.payload.loginToken),
 }
 

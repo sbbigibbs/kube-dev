@@ -11,12 +11,19 @@ export default (state = initialState, action = {}) => {
         [actionTypes.PUT_COUNTRY_LIST]: handlePutCountryList,
         [actionTypes.UPDATE_SHIPPING_COUNTRY]: handleUpdateShippingCountry,
         [actionTypes.GET_PROMO_ERRORS]: handlePromoError,
-        [actionTypes.CLEAR_PROMO_ERRORS]: handleClearPromoError
+        [actionTypes.CLEAR_PROMO_ERRORS]: handleClearPromoError,
+        [actionTypes.LOAD_RECOMMENDATIONS]: handleLoadCountryList,
+        [actionTypes.TOGGLE_SHIPPING]: handleToggleShipping,
+        [actionTypes.TOGGLE_TAB]: handleToggleTab
     }
 
     const callback = callbacks[action.type]
 
     return callback ? callback(state, action) : state
+}
+
+function handleClearApp(state, action) {
+    return initialState
 }
 
 function handleChangeZipcode(state, action) {
@@ -28,6 +35,7 @@ function handleChangeZipcode(state, action) {
 
 function handleLoadShoppingCart(state, action) {
     const {cart} = action.payload.data
+    //map over cart product ids and set it in state
     return state
         .set("cart", fromJS(cart))
         .set("country", cart.countryDisplayName)
@@ -75,4 +83,19 @@ function handleUpdateShippingCountry(state, action) {
         .set("countryCode", selectedCountry.countryCode)
 }
 
-//return state.updateIn(["cart", "appliedCouponsLst"], list => list.push(couponCode)
+function handleLoadCountryList(state, action) {
+    const prodList = action.payload
+    return state
+        .set("recommendationList", prodList)
+}
+
+function handleToggleShipping(state, action) {
+  return state
+    .set("showShipping", !state.get("showShipping"))
+}
+
+function handleToggleTab(state, action) {
+  const tabName = action.payload
+  return state
+    .set('selectedTab', tabName.tab)
+}

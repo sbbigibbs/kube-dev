@@ -32,7 +32,8 @@ export default dispatch => createSelector([
         redux.workflowCart.actions.changeProductQuantity({productId, quantity}))
     const createOnDeleteProduct = ({productId}) => () => dispatch(redux.workflowCart.actions.deleteProductFromCart({productId}))    
     const onRefreshCart = () => dispatch(
-        redux.workflowCart.actions.loadPage()
+        redux.workflowCart.actions.deleteAllProductsFromCart()
+        //redux.workflowCart.actions.loadPage()
     )
     const lang = config.get("language")
     const translator = new Translator(lang);

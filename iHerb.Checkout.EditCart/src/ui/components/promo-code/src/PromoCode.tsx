@@ -12,38 +12,61 @@ export default (props) => {
         savings,
         onDeleteCouponCode,
         discountMsgPriceList,
+        promoError,
         labels
     } = props
     
-    return <View style={styles.root}>
-        <Text style={styles.savings}>{labels.savings} ({savings})</Text>
-        <Text>{labels.applyPromo}</Text>
-        <View style={styles.actions}>
-            <input type={'text'} style={styles.textInput}
-                onChangeText={onChangeCouponCode}
-                value={couponCode} />
+    const promoView = couponList.length > 0 ? <View style={styles.couponSection}>
+    {couponList.map((coupon,i) => {
+        
+        return <View style={(i === couponList.length - 1) ? styles.attributeNoBorder : styles.attribute}>
+                    <View>
+                        <Text style={styles.label}>{coupon.couponCode}</Text>
+                        <Text style={styles.description}>{coupon.couponDescription}</Text>
+                    </View>
+                    <View><Text style={styles.removeItem} onPress={() => onDeleteCouponCode(coupon.couponCode)}>{labels.removeButton}</Text></View>
+           
+        </View>
+    })}  
+    </View> : <Text></Text>
 
-            <View style={styles.button}>
-                <Text onPress={onApplyCouponCode}>{labels.apply}</Text>
-            </View>
-        </View>
-        <View style={styles.root}>
-            <Text style={styles.promoTitle}>{labels.promoCode}</Text>
-              {couponList.map((coupon, index) => {
-                return <View key={index} style={styles.actions}>
-                    <Text>{coupon.couponCode} - {coupon.couponDescription}
-                        <Text style={styles.removeItem} onPress={() => onDeleteCouponCode(coupon.couponCode)}>{labels.removeButton}</Text>
-                    </Text>
+    return <View style={styles.root}>
+        <Text style={styles.title}>Apply Promo or Rewards Code</Text>
+        
+        <View style={styles.promoCodes}>
+            <View style={styles.actions}>
+                {/* <TextInput style={styles.textInput}
+                    onChangeText={onChangeCouponCode}
+                    placeholder="Enter Code"
+                    value={couponCode} /> */}
+                    <input style={styles.textInput} type="text" placeholder="Enter Code" onChange={(e) => onChangeCouponCode(e.target.value)} value={couponCode}/>
+                <View style={styles.button}>
+                    <Text onPress={onApplyCouponCode}>{labels.apply}</Text>
                 </View>
-            })}  
+               
+                
+            </View>
+            <Text style={styles.error}>{promoError}</Text>
+           {promoView}
         </View>
-        <View style={styles.root}>
-            <Text style={styles.promoTitle}>{labels.savings}</Text>
-                {discountMsgPriceList.map((discount, index) => {
-                    return <View key={index} style={styles.action}>
-                        <Text>{discount.message} - {discount.price}</Text>
+        <Text style={styles.title}>{labels.savings}</Text>
+        
+                <View style={styles.savingsSection}>
+                {discountMsgPriceList.map((discount,i) => {
+                        return <View style={(i === discountMsgPriceList.length - 1) ? styles.attributeNoBorder : styles.attribute}>
+                            
+                            <Text style={styles.label}>{discount.message}</Text>
+                            <Text style={styles.savings}>({discount.price})</Text>
                         </View>
-                })}
-        </View>
+                    })}
+
+                    <View style={styles.totalSavingsAttribute}>
+                        <Text style={styles.totalSavings}>{labels.savings}</Text>
+                        <Text style={styles.totalSavings}>{savings}</Text>
+                    </View>
+                    
+                </View>
+                           
+        
     </View>
 }

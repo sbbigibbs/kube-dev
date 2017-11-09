@@ -1,11 +1,15 @@
-import request from "superagent"
+import 'whatwg-fetch'
 
-export const ApplyCouponCodeService = (anonymousToken, checkoutApiUrl, header = {}) =>
-    (couponCode) =>
-        new Promise((resolve, reject) => request
-            .post(`${checkoutApiUrl}/ec/pac?couponCode=${couponCode}`)
-            .set("AnonymousToken", anonymousToken)
-            .set("iH-Pref", header.ihPref || "lc=en-US;ctc=KR;cc=USD")
-            .end((error, response) => error
-                ? reject({error})
-                : resolve({data: response.body})))
+export const ApplyCouponCodeService = (anonymousToken, loginToken, checkoutApiUrl, header = {}, couponCode) =>
+    () =>
+        new Promise((resolve, reject) => fetch(`${checkoutApiUrl}/ec/pac?couponCode=${couponCode}`, {
+          method: 'POST',
+          headers: {
+            'LoginToken': loginToken,
+            "AnonymousToken": anonymousToken,
+            'IH-Pref': header.ihPref || "lc=en-US;ctc=JP;cc=USD"
+          }
+        }).then(response => response.json())
+          .then(json => resolve({data: json}))
+          .catch(error => reject({error})
+        ))

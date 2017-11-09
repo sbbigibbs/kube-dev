@@ -5,6 +5,7 @@ import {GetAnonymousShoppingCartService} from './get-annonymous-shopping-cart/sr
 import {GetCountryListService} from './get-country-list/src/index'
 import {GetShippingMethodsService} from './get-shipping-methods/src/index'
 import {GetShoppingCartService} from './get-shopping-cart/src/index'
+import {GetWishListService} from './get-wishlist/src/index'
 import {PostToWishListService} from './post-to-wishlist/src/index'
 import {UpdateProdQtyService} from './update-product-quantity/src/index'
 import {UpdateShippingMethodService} from './update-shipping-method/src/index'
@@ -17,6 +18,7 @@ export default {
     GetCountryListService,
     GetShippingMethodsService,
     GetShoppingCartService,
+    GetWishListService,
     PostToWishListService,
     UpdateProdQtyService,
     UpdateShippingMethodService

@@ -10,6 +10,7 @@ export default class CartItems extends React.Component {
     render() {
         let basketErrors;
         let errorStyle = this.props.isBasketErrorEmpty ? "basketErrorEmpty" : "basketError"
+        let hr = this.props.isBasketErrorEmpty ? <Text></Text> : <Text style={styles.border}></Text>
 
         return <View style={styles.flex1}>
             {basketErrors = <View style={styles[errorStyle]}>
@@ -17,10 +18,7 @@ export default class CartItems extends React.Component {
                     return <ErrorBox key={index} isCartError={true} errorMessage={errorMsg} />
                 })}
             </View>}
-            <View style={styles.border}>
-        
-            </View>
-            
+            {hr}
             {
                 this.props.cartItems.map( (cartItem, index) => <CartItem.Component key={index} {...cartItem} /> )
             }

@@ -35,7 +35,7 @@ export default (path) => {
 
         return eval(code.outputText)
         
-    }catch(ex) {
+    } catch(ex) {
         var exception = ex;
         console.log(ex)
     }

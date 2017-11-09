@@ -7,40 +7,53 @@ export const dropdownStyles = {
   customLabel: {
     lineHeight: 1,
     paddingLeft: 0,
-    borderRightWidth: 1,
-    borderColor: '#808080',
-    borderStyle: 'solid'
+    
   },
-  customSelectedItem: {},
-  customMenuItem: {},
-  customMenu: {},
-  customUnderline: {},
-  customIcon: {}
+  customIconStyle: {
+    top: -17
+  },
+  menuStyle: {
+    paddingLeft: 0
+  },
+  customSelectedMenuItemStyle: {
+    color: '#458500'
+    
+  },
+  dropdownDisplay: {
+    width: 30,
+    paddingRight: 30
+  }
 };
 
 export const styles = StyleSheet.create({
-    root: {
+  root: {
+    
+    borderColor: '#ededed',
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+    padding: 12
+  },
+    lineItem: {
       flexDirection: 'row',
-      borderColor: '#ededed',
-      borderBottomWidth: 1,
-      borderStyle: 'solid',
+      
       paddingBottom: 15,
-      paddingTop: 15
-
+      paddingTop: 15,
+      
     },
     cartItem: {
-    flex: 1,
-    padding: 15,
-    borderBottomWidth: 2,
-    borderColor: "#ededed",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    flexWrap: 'nowrap',
-    fontSize: 14
+      flex: 1,
+      padding: 15,
+      borderBottomWidth: 2,
+      borderColor: "#ededed",
+      justifyContent: "space-between",
+      flexDirection: "row",
+      flexWrap: 'nowrap',
+      fontSize: 14
     },
     image: {
       flexDirection: "column",
-      flex: 1
+      flex: 1,
+      fontSize: 9
     },
     promo: {
       backgroundColor: '#e3edd9',
@@ -93,10 +106,11 @@ export const styles = StyleSheet.create({
     flex: 3,
     flexDirection: "row",
     flexWrap: "wrap"
-
+  
     },
     price: {
-      flex: 1
+      flex: 1,
+      fontWeight: 'bold'
     },
     quantityContainer: {
       flex: 1,
@@ -114,6 +128,15 @@ export const styles = StyleSheet.create({
     total: {
       fontSize: 16,
       color: '#000000',
+      fontWeight: '700',
+      fontFamily: 'Lato',
+      textAlign: 'right'
+    },
+    each: {
+      fontSize: 9,
+      fontFamily: 'Lato',
+      color: '#747474',
+      textAlign: 'right',
       fontWeight: 'bold'
     },
     removeItem: {
@@ -125,31 +148,44 @@ export const styles = StyleSheet.create({
     details: {
       flex: 3,
       flexDirection: "column",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      
     },
     pricing: {
       flexDirection: "row",
+      
     },
     actions: {
       flexDirection: "row",
       marginTop: 10
     },
     productImage: {
-      width: 60,
-      height: 60
+      width: 75,
+      height: 75,
+      marginBottom: 10
+      
     },
-    weight: {
+    weightContainer: {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      //color: '#747474'
+      marginRight: 20
+      
+    },
+    weight: {
+      color: '#999999',
+      fontSize: 9,
+      fontFamily: 'Lato'
     },
     productTitle: {
-      fontSize: 12,
-      color: "#000000"
+      fontSize: 14,
+      color: "#000000",
+      fontFamily: 'Lato',
+      marginRight: 50
     },
     productPrice: {
-      flexDirection: "column"
+      flexDirection: "column",
+      
     },
     addToList: {
       color: "#1976d2",
@@ -161,7 +197,10 @@ export const styles = StyleSheet.create({
       textDecorationLine: "underline"
     },
     title: {
-      flex: 1
+      flex: 1,
+      fontFamily: 'Lato',
+      marginTop: 12,
+      marginBottom: 12
     },
     discontinued: {
       color: 'red'

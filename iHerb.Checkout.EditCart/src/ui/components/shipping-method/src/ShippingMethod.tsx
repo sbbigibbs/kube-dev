@@ -3,10 +3,6 @@ import { View, Text, Image, StyleSheet, Touchable, Platform } from 'react-primit
 import RadioInput from '@iherb/ui-component-radio-input';
 import { radioStyles, styles } from './styles/shipping-method'
 
-export interface IShippingMethod {
-
-}
-
 export default class ShippingMethod extends React.Component {
   props: any
   constructor(props) {

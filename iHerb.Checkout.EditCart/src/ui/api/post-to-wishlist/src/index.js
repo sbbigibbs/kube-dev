@@ -1,15 +1,18 @@
-import request from "superagent";
+import 'whatwg-fetch'
 
 export const PostToWishListService = (loginToken, myAccountApiUrl, header = {}) =>
-    (prodId) => {
-        console.log('loginToken: ', loginToken)
-        console.log('myaccount api url: ', myAccountApiUrl)
-        console.log('prodId: ', prodId)
-        new Promise((resolve, reject) => request
-            .post(`${myAccountApiUrl}/pr/pwl`)
-            .send({pid: prodId, quantity: 1})
-            .set("LoginToken", loginToken)
-            .end((error, response) => error
-                ? reject({error})
-                : resolve({data: response.body})))
-    }
+    (prodId) =>
+        new Promise((resolve, reject) => fetch(`${myAccountApiUrl}/pr/pwl`, {
+          method: 'POST',
+          headers: {
+            'LoginToken': loginToken,
+            'IH-Pref': header.ihPref || "lc=en-US;ctc=JP;cc=USD"
+          },
+          body: {
+            pid: prodId,
+            quantity: 1
+          }
+        }).then(response => response.json())
+          .then(json => resolve({data: json}))
+          .catch(error => reject({error})
+        ))

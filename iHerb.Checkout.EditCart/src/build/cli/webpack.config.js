@@ -34,7 +34,9 @@ module.exports = {
             "iherb-redux": path.resolve(process.cwd(), "./src/ui/redux/index"),
             "iherb-sagas": path.resolve(process.cwd(), "./src/ui/sagas/index"),
             "iherb-selectors": path.resolve(process.cwd(), "./src/ui/selectors/index"),
-            "iherb-translations": path.resolve(process.cwd(), "./src/ui/translations/index")
+            "iherb-translations": path.resolve(process.cwd(), "./src/ui/translations/index"),
+            "iherb-middleware": path.resolve(process.cwd(), "./src/ui/middleware/src/index"),
+            "iherb-pages": path.resolve(process.cwd(), "./src/ui/pages/index")
         },
         plugins: [
             

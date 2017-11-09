@@ -1,12 +1,15 @@
-import request from "superagent"
+import 'whatwg-fetch'
 
-export const DeleteCouponService = (anonymousToken, checkoutApiUrl, header = {}) =>
-    (couponCode) =>
-        new Promise((resolve, reject) => request
-            .delete(`${checkoutApiUrl}/ec/dc?couponCode=${couponCode}`)
-            .set("AnonymousToken", anonymousToken)
-            .set("iH-Pref", header.ihPref || "lc=en-US;ctc=KR;cc=USD")
-            .end((error, response) => error 
-                ? reject({error}) 
-                : resolve({data: response.body})))
-                
+export const DeleteCouponService = (anonymousToken, loginToken, checkoutApiUrl, header = {}, couponCode) =>
+    () =>
+        new Promise((resolve, reject) => fetch(`${checkoutApiUrl}/ec/dc?couponCode=${couponCode}`, {
+          method: 'DELETE',
+          headers: {
+            'LoginToken': loginToken,
+            "AnonymousToken": anonymousToken,
+            'IH-Pref': header.ihPref || "ln=en-US;ctc=KR;cc=USD"
+          }
+        }).then(response => response.json())
+          .then(json => resolve({data: json}))
+          .catch(error => reject({error})
+        ))

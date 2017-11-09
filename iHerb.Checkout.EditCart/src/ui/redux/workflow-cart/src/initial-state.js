@@ -4,6 +4,7 @@ const initialState = {
     cart: {
         "prodList": [],
         "discountMsgLst": [],
+        "discountLabelList": [],
         "discountMsgPriceLst": [],
         "discount": "",
         "discountPct": "",
@@ -34,7 +35,10 @@ const initialState = {
     countryList: [],
     requiresZip: true,
     state: "VALID",
-    promoCodeError: ""
+    promoCodeError: "",
+    recommendationList: [],
+    showShipping: false,
+    selectedTab: 'cart'
 }
 
 export default fromJS(initialState)

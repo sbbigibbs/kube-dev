@@ -1,11 +1,14 @@
-import request from "superagent";
+import 'whatwg-fetch'
 
-export const GetAnonymousShoppingCartService = (anonymousToken, checkoutApiUrl, header = {}) => 
-    (countryCode, zipcode) => 
-        new Promise((resolve, reject) => request
-            .get(`${checkoutApiUrl}/ec/gasc?countryCode=${countryCode}`)
-            .set("AnonymousToken", anonymousToken)
-            .set("iH-Pref", header.ihPref || "lc=en-US;ctc=JP;cc=USD")
-            .end((error, response) => error 
-                ? reject({error}) 
-                : resolve({data: response.body})))
+export const GetAnonUserCart = (anonymousToken, checkoutApiUrl, header = {}) =>
+  (zipCode, countryCode) =>
+      new Promise((resolve, reject) => fetch(`${checkoutApiUrl}/ec/gasc`, {
+        method: 'GET',
+        headers: {
+          'AnonymousToken': anonymousToken,
+          'IH-Pref': header.ihPref || "lc=en-US;ctc=JP;cc=USD"
+        }
+      }).then(response => response.json())
+        .then(json => resolve({data: json}))
+        .catch(error => reject({error})
+      ))

@@ -15,7 +15,7 @@ export default class ErrorBox extends React.Component {
     let cartErrorTitle = isCartError ? 
         <Text style={styles.title}>Errors found in cart:</Text> : <Text></Text>
     let errMsg = errorMessage.indexOf("<") >= 0 ? 
-        convertToJSX(errorMessage) : <Text>{errorMessage}</Text>
+        convertToJSX(errorMessage) : <Text stlye={styles.errorMsg}>{'\u2022'} {errorMessage}</Text>
     
     return <View style={styles.error}>
             {cartErrorTitle}

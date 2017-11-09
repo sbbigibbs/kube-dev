@@ -24,7 +24,11 @@ export const styles = StyleSheet.create({
       flexWrap: 'nowrap'
   },
   basketError: {
-      flex: 1
+      flex: 1,
+      orderBottomWidth: 1,
+      borderColor: '#ededed',
+      borderStyle: 'solid',
+      margin: 12
   },
   basketErrorEmpty: {
       flex: 1
@@ -32,7 +36,6 @@ export const styles = StyleSheet.create({
   border: {
       borderBottomWidth: 1,
       borderColor: '#ededed',
-      borderStyle: 'solid',
-      marginTop: 15
+      borderStyle: 'solid'
   }
 })

@@ -1,13 +1,14 @@
-import request from "superagent"
+import 'whatwg-fetch'
 
-export const GetCountryListService = (loginToken, myAccountApiUrl, header = {}) =>
+export const GetCountryListService = (anonymousToken, loginToken, myAccountApiUrl, header = {}) =>
     () =>
-    new Promise((resolve, reject) => {
-        request
-            .get(`${myAccountApiUrl}/cfg/gr`)
-            .set("LoginToken", loginToken)
-            .set("iH-Pref", header.ihPref)
-            .end((error, response) => error
-                ? reject({error})
-                : resolve({data: response.body}))
-    })
+        new Promise((resolve, reject) => fetch(`${myAccountApiUrl}/cfg/gr`, {
+          method: 'GET',
+          headers: {
+            'LoginToken': loginToken,
+            'IH-Pref': header.ihPref || "lc=en-US;ctc=JP;cc=USD"
+          }
+        }).then(response => response.json())
+          .then(json => resolve({data: json}))
+          .catch(error => reject({error})
+        ))
