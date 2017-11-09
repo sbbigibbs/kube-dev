@@ -59,7 +59,7 @@ function build(src, output, modules, dev, watch) {
             hot: true,
             hotOnly: true,
             inline: true,
-            host: 'localhost',
+            host: 'checkout4.iherbtest.com',
             port: 8080
         }
         
