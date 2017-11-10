@@ -40,7 +40,6 @@ export const ApplyCouponCodeHandler = props => store => next => action => co(fun
         function createService() {
             return ApplyCouponCodeService(
                 anonymousToken,
-                loginToken,
                 checkoutApi,
                 header,
                 couponCode

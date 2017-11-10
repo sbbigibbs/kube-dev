@@ -30,11 +30,18 @@ export const PostToWishlistHandler = props => store => next => action => co(func
         const service = createService()
 
         function createService() {
-            return PostToWishListService(
-                loginToken,
-                myAccountApi,
-                productId.productId
-            )
+            if(!loginToken) {
+                location.href = '/account/login'
+                document.cookie = document.cookie.match(/ihr-lac/) ? 
+                    document.cookie.replace(/ihr-lac[^;]/, `ihr-lac=rturl=${location.href}`) :
+                    document.cookie + `;ihr-lac=rturl=${location.href}`;
+            } else {
+                return PostToWishListService(
+                    loginToken,
+                    myAccountApi,
+                    productId.productId
+                )
+            }
         }
     }
     catch(error) {

@@ -35,7 +35,6 @@ export const DeleteCouponCodeHandler = props => store => next => action => co(fu
         function createService() {
             return DeleteCouponService(
                 anonymousToken,
-                loginToken,
                 checkoutApi,
                 header,
                 couponCode
