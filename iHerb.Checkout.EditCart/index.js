@@ -205,22 +205,22 @@ http.createServer(function(req, res) {
   } //else  {
   //   forward('checkout.iherbtest.com', req, response => res.end(response))
   // }
-  //   } else if (req.url == bundlePath) {
+  else if (req.url == bundlePath) {
 
-  //   res.setHeader('Content-Type', 'text/javascript')
-  //   if(dev)
-  //     forwardHttp('localhost:8080/bundle.web.js', '', response => res.end(response))
-  //   else
-  //     res.end(bundle)
+    res.setHeader('Content-Type', 'text/javascript')
+    if(dev)
+      forwardHttp('localhost:8080/bundle.web.js', '', response => res.end(response))
+    else
+      res.end(bundle)
     
-  // } else if (req.url == bundlePath + '.map') {
+  } else if (req.url == bundlePath + '.map') {
     
-  //       res.setHeader('Content-Type', 'text/javascript')
-  //       if(dev)
-  //         forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
-  //       else
-  //         res.end()
-  // } //else if(req.url.split('/')[1] =="public") {
+        res.setHeader('Content-Type', 'text/javascript')
+        if(dev)
+          forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
+        else
+          res.end()
+  }   //else if(req.url.split('/')[1] =="public") {
   //   console.log(req.url)
   //   req.url = req.url.split('public')[1];
   //   req.host = 'localhost'
