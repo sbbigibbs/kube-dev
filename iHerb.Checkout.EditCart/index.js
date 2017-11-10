@@ -31,7 +31,7 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
 
     var bundle,
         sum,
-        bundlePath = '/public/bundle.web.js';
+        bundlePath = 'http:/localhost:8080/bundle.web.js';
     
     if(!dev) {
       bundle = fs.readFileSync('./dist/bundle.web.js');
