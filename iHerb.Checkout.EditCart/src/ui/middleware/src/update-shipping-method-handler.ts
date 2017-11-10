@@ -36,7 +36,6 @@ export const UpdateShippingMethodHandler = props => store => next => action => c
         function createService() {
             return UpdateShippingMethodService(
                 anonymousToken,
-                loginToken,
                 checkoutApi,
                 shippingId
             )

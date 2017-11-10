@@ -202,6 +202,8 @@ http.createServer(function(req, res) {
         })
       })
     })
+  } else  {
+    forward('checkout.iherbtest.com', req, response => res.end(response))
   }
   //   } else if (req.url == bundlePath) {
 

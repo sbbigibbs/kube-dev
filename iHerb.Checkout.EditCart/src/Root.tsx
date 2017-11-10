@@ -139,6 +139,19 @@ export const run = (props) => {
             wishlist: redux.wishlist.reducer
         }),
         applyMiddleware(...middleware))
+    
+        // sagaMiddleware.run(sagas.loadPageSaga)
+        // sagaMiddleware.run(sagas.getShippingMethodsSaga)
+        // sagaMiddleware.run(sagas.changeProductQuantitySaga)
+        // sagaMiddleware.run(sagas.updateShippingMethodSaga)
+        // sagaMiddleware.run(sagas.deleteProductSaga)
+        // sagaMiddleware.run(sagas.errorThrownSaga)
+        // sagaMiddleware.run(sagas.applyCouponCodeSaga)
+        // sagaMiddleware.run(sagas.deleteCouponCodeSaga)
+        // sagaMiddleware.run(sagas.getCountryListSaga)
+        // sagaMiddleware.run(sagas.postToWishlistSaga)
+        //sagaMiddleware.run(sagas.getRecommendationsSaga)
+        //sagaMiddleware.run(sagas.getWishlistSaga)
 
     const RecycleBin = () => <div>Recycle Bin</div>
     

@@ -1,11 +1,10 @@
 import 'whatwg-fetch'
 
-export const DeleteProductService = (anonymousToken, loginToken, checkoutApiUrl, header = {}, productId) =>
+export const DeleteProductService = (anonymousToken, checkoutApiUrl, header = {}, productId) =>
   () =>
     new Promise((resolve, reject) => fetch(`${checkoutApiUrl}/ec/dpcrc/?pid=${productId.productId}`, {
       method: 'DELETE',
       headers: {
-        'LoginToken': loginToken,
         'anonymousToken': anonymousToken,
         'IH-Pref': header.ihPref || "lc=en-US;ctc=JP;cc=USD"
       }

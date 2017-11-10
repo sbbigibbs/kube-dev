@@ -1,6 +1,6 @@
 import 'whatwg-fetch'
 
-export const GetAnonUserCart = (anonymousToken, checkoutApiUrl, header = {}) =>
+export const GetAnonymousShoppingCartService = (anonymousToken, checkoutApiUrl, header = {}) =>
   (zipCode, countryCode) =>
       new Promise((resolve, reject) => fetch(`${checkoutApiUrl}/ec/gasc`, {
         method: 'GET',

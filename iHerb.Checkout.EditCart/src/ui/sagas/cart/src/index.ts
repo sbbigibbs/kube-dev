@@ -24,8 +24,10 @@ export function* loadPageSaga() {
 export function* loadPageHandler(action) {
     try {
         const config = yield select( (state:any) => state.config )
-        const loginToken = action.payload.loginToken//config.get("loginToken")
-        const checkoutApi = action.payload.checkoutApi//config.get("checkoutApi")
+        const loginToken = action.payload.loginToken
+        const checkoutApi = action.payload.checkoutApi
+        const myAccountApi = action.payload.myAccountApi
+        const anonymousToken = action.payload.anonymousToken
         const language = action.payload.language
         const currency = action.payload.currency
         const country = action.payload.country
@@ -33,7 +35,7 @@ export function* loadPageHandler(action) {
             ihPref: `lc=${language};ctc=${country};cc=${currency}`
         }
         const {data} = yield call(GetAnonymousShoppingCartService(
-            loginToken,
+            anonymousToken,
             checkoutApi,
             header
         ),
@@ -58,8 +60,10 @@ export function* getShippingMethodsHandler(action) {
         const countryCode = action.payload.countryCode
 
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const myAccountApi = config.get("myAccountApi")
         const language = config.get("language")
         const currency = config.get("currency")
         const country = config.get("country")
@@ -68,7 +72,7 @@ export function* getShippingMethodsHandler(action) {
         }
 
         const response = yield call(GetShippingMethodsService(
-            loginToken,
+            anonymousToken,
             checkoutApi,
             header),
             zipcode,
@@ -94,8 +98,10 @@ export function* changeProductQuantityHandler(action) {
     try {
         const {productId, quantity} = action.payload
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const myAccountApi = config.get("myAccountApi")
         const language = config.get("language")
         const currency = config.get("currency")
         const country = config.get("country")
@@ -104,12 +110,12 @@ export function* changeProductQuantityHandler(action) {
         }
 
         const {data} = yield call(UpdateProdQtyService(
-            loginToken,
+            anonymousToken,
             checkoutApi
         ), productId, quantity)
 
         const cartData = yield call(GetAnonymousShoppingCartService(
-            loginToken,
+            anonymousToken,
             checkoutApi,
             header
         ),
@@ -131,8 +137,10 @@ export function* updateShippingMethodHandler(action) {
     try {
         const {shippingId} = action.payload
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const myAccountApi = config.get("myAccountApi")
         const language = config.get("language")
         const currency = config.get("currency")
         const country = config.get("country")
@@ -141,11 +149,11 @@ export function* updateShippingMethodHandler(action) {
         }
 
         yield call(UpdateShippingMethodService(
-            loginToken,
+            anonymousToken,
             checkoutApi
         ), shippingId)
         const {data} = yield call(GetAnonymousShoppingCartService(
-            loginToken,
+            anonymousToken,
             checkoutApi,
             header
         ),
@@ -168,8 +176,10 @@ export function* deleteProductHandler(action) {
     try {
         const {productId} = action.payload
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const myAccountApi = config.get("myAccountApi")
         const language = config.get("language")
         const currency = config.get("currency")
         const country = config.get("country")
@@ -178,7 +188,7 @@ export function* deleteProductHandler(action) {
         }
 
         const {data} = yield call(DeleteProductService(
-            loginToken,
+            anonymousToken,
             checkoutApi, 
             header
         ), productId)
@@ -200,8 +210,13 @@ export function* postToWishlistHandler(action) {
     try {
         const {productId} = action.payload
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
+        const checkoutApi = config.get("checkoutApi")
         const myAccountApi = config.get("myAccountApi")
+        const language = config.get("language")
+        const currency = config.get("currency")
+        const country = config.get("country")
 
         yield call(PostToWishListService(
             loginToken,
@@ -234,8 +249,10 @@ export function* applyCouponCodeHandler(action) {
     try {
         const {couponCode} = action.payload
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const myAccountApi = config.get("myAccountApi")
         const language = config.get("language")
         const currency = config.get("currency")
         const country = config.get("country")
@@ -278,8 +295,10 @@ export function* deleteCouponCodeHandler(action) {
     try {
         const {couponCode} = action.payload
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
         const checkoutApi = config.get("checkoutApi")
+        const myAccountApi = config.get("myAccountApi")
         const language = config.get("language")
         const currency = config.get("currency")
         const country = config.get("country")
@@ -316,7 +335,9 @@ export function* getCountryListSaga() {
 export function* getCountryListHandler(action) {
     try {
         const config = yield select( (state:any) => state.config )
+        const anonymousToken = config.get("anonymousToken")
         const loginToken = config.get("loginToken")
+        const checkoutApi = config.get("checkoutApi")
         const myAccountApi = config.get("myAccountApi")
         const language = config.get("language")
         const currency = config.get("currency")
@@ -326,7 +347,7 @@ export function* getCountryListHandler(action) {
         }
 
         const {data} = yield call(GetCountryListService(
-            loginToken,
+            anonymousToken,
             myAccountApi
         ))
         yield put(actions.putCountryList(data.locale.countryList))
