@@ -31,9 +31,9 @@ export const PostToWishlistHandler = props => store => next => action => co(func
 
         function createService() {
             if(!loginToken) {
-                document.cookie = document.cookie.match(/ihr-lac/) ? 
-                    encodeURIComponent(document.cookie.replace(/ihr-lac[^;]+/, `ihr-lac=rturl=${location.href}`)) :
-                    encodeURIComponent(document.cookie + `;ihr-lac=rturl=${location.href}`);
+                document.cookie = decodeURIComponent(document.cookie).match(/ihr-lac/) ? 
+                    encodeURIComponent(decodeURIComponent(document.cookie).replace(/ihr-lac[^;]+/, `ihr-lac=rturl=${location.href}`)) :
+                    encodeURIComponent(decodeURIComponent(document.cookie) + `;ihr-lac=rturl=${location.href}`);
                 console.log(document.cookie)
                 location.href = '/account/login';
             } else {
