@@ -231,7 +231,7 @@ http.createServer(function(req, res) {
   // }
 
 // The http server listens on port 3000
-}).listen(8080, function(err) {
+}).listen(3000, function(err) {
   if (err) throw err
   console.log("Checkout API: " + checkout)
   console.log("MyAccount API: " + myaccount)
