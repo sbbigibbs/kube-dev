@@ -34,6 +34,7 @@ export const PostToWishlistHandler = props => store => next => action => co(func
                 document.cookie = document.cookie.match(/ihr-lac/) ? 
                     document.cookie.replace(/ihr-lac[^;]/, `ihr-lac=rturl=${location.href}`) :
                     document.cookie + `;ihr-lac=rturl=${location.href}`;
+                console.log(document.cookie)
                 location.href = '/account/login';
             } else {
                 return PostToWishListService(
