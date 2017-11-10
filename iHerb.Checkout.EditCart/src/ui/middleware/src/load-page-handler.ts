@@ -31,8 +31,10 @@ export const LoadPageHandler = props => store => next => action => co(function*(
         
         store.dispatch(actions.refreshShoppingCart(header.ihPref))
         store.dispatch(actions.loadCountryList())
-        store.dispatch(actions.getRecommendations())
-        store.dispatch(actions.getWishlist())
+        if(loginToken) { 
+            store.dispatch(actions.getRecommendations())
+            store.dispatch(actions.getWishlist())
+        }
     } 
     catch(error) {
         store.dispatch(actions.errorThrown(error))

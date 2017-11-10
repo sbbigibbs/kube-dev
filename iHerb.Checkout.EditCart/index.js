@@ -30,7 +30,7 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
     var bundle,
-        sume,
+        sum,
         bundlePath = '/public/bundle.web.js';
     
     if(!dev) {
@@ -175,7 +175,7 @@ http.createServer(function(req, res) {
                 window._checkoutAPI = '${checkout}';
                 window._myaccountAPI = '${myaccount}';
                 var appPay = false;
-                window.iHerb_ActionHost = 'http://checkout4.iherbtest.com:3000';
+                window.iHerb_ActionHost = 'http://checkout4.iherbtest.com:8080';
               `}}),
 
               script({src: 'https://s.images-iherb.com/js/vendor/jquery-1.11.2.min.js' }),
@@ -202,23 +202,23 @@ http.createServer(function(req, res) {
         })
       })
     })
+  }
+  //   } else if (req.url == bundlePath) {
 
-    } else if (req.url == bundlePath) {
-
-    res.setHeader('Content-Type', 'text/javascript')
-    if(dev)
-      forwardHttp('localhost:8080/bundle.web.js', '', response => res.end(response))
-    else
-      res.end(bundle)
+  //   res.setHeader('Content-Type', 'text/javascript')
+  //   if(dev)
+  //     forwardHttp('localhost:8080/bundle.web.js', '', response => res.end(response))
+  //   else
+  //     res.end(bundle)
     
-  } else if (req.url == bundlePath + '.map') {
+  // } else if (req.url == bundlePath + '.map') {
     
-        res.setHeader('Content-Type', 'text/javascript')
-        if(dev)
-          forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
-        else
-          res.end()
-  } //else if(req.url.split('/')[1] =="public") {
+  //       res.setHeader('Content-Type', 'text/javascript')
+  //       if(dev)
+  //         forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
+  //       else
+  //         res.end()
+  // } //else if(req.url.split('/')[1] =="public") {
   //   console.log(req.url)
   //   req.url = req.url.split('public')[1];
   //   req.host = 'localhost'
@@ -231,7 +231,7 @@ http.createServer(function(req, res) {
   // }
 
 // The http server listens on port 3000
-}).listen(3000, function(err) {
+}).listen(8080, function(err) {
   if (err) throw err
   console.log("Checkout API: " + checkout)
   console.log("MyAccount API: " + myaccount)
