@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 
-export const GetCountryListService = (anonymousToken,
-  loginToken,
+export const GetCountryListService = (
+  anonymousToken,
   myAccountApiUrl,
   country,
   currency,

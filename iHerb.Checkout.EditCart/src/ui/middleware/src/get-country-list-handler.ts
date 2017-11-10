@@ -35,7 +35,6 @@ export const GetCountryListHandler = props => store => next => action => co(func
         function createService() {
             return GetCountryListService(
                 anonymousToken,
-                loginToken,
                 myAccountApi,
                 country,
                 currency,

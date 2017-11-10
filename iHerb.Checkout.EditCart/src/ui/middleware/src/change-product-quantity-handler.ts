@@ -35,7 +35,6 @@ export const ChangeProductQuantityHandler = props => store => next => action => 
         function createService() {
             return UpdateProdQtyService(
                 anonymousToken,
-                loginToken,
                 checkoutApi,
                 header,
                 productId,

@@ -36,7 +36,7 @@ const {
     GetWishListService,
     PostToWishListService,
     UpdateShippingMethodService,
-    GetAnonymousShoppingCartService
+    GetAnonUserCart
 
 } = api
 
@@ -76,7 +76,7 @@ export const run = (props) => {
     const actionHandlers = [
         LoadPageHandler({
             GetShoppingCartService,
-            GetAnonymousShoppingCartService
+            GetAnonUserCart
         }),
         ApplyCouponCodeHandler({
             ApplyCouponCodeService
@@ -89,7 +89,7 @@ export const run = (props) => {
         }),
         UpdateShoppingCartHandler({
             GetShoppingCartService,
-            GetAnonymousShoppingCartService
+            GetAnonUserCart
         }),
         DeleteProductHandler({
             DeleteProductService

@@ -1,7 +1,7 @@
 import {ApplyCouponCodeService} from './apply-coupon-code/src/index'
 import {DeleteCouponService} from './delete-coupon/src/index'
 import {DeleteProductService} from './delete-product/src/index'
-import {GetAnonymousShoppingCartService} from './get-annonymous-shopping-cart/src/index'
+import {GetAnonUserCart} from './get-annonymous-shopping-cart/src/index'
 import {GetCountryListService} from './get-country-list/src/index'
 import {GetShippingMethodsService} from './get-shipping-methods/src/index'
 import {GetShoppingCartService} from './get-shopping-cart/src/index'
@@ -14,7 +14,7 @@ export default {
     ApplyCouponCodeService,
     DeleteCouponService,
     DeleteProductService,
-    GetAnonymousShoppingCartService,
+    GetAnonUserCart,
     GetCountryListService,
     GetShippingMethodsService,
     GetShoppingCartService,

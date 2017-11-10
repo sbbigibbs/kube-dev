@@ -34,7 +34,6 @@ export const DeleteProductHandler = props => store => next => action => co(funct
         function createService() {
             return DeleteProductService(
                 anonymousToken,
-                loginToken,
                 checkoutApi,
                 header,
                 productId
