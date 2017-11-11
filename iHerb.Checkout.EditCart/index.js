@@ -340,7 +340,7 @@ function header(req, country,  language, currency, cb) {
         $('.iherb-hamburger-menu-account-name').text(name)
 
       if(inventory)
-        $('.shopping-cart-amount').text(inventory)
+        $('.iherb-shopping-cart').append(`<span class="shopping-cart-amount">${inventory}</span>`)
 
       cb($.html());
     });
