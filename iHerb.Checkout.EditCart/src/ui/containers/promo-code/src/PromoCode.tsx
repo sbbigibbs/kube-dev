@@ -9,7 +9,7 @@ import translations from 'iherb-translations';
 var PromoCode = Components.PromoCode.Component
 var workflowCart = selectors.root.workflowCart
 var config = selectors.root.config
-var actions = redux.cart.actions
+var actions = redux.workflowCart.actions
 var Translator = translations.cart
 var labels = Components.PromoCode.labels
 
