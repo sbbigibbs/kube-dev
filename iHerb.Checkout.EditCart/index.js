@@ -163,6 +163,12 @@ http.createServer(function(req, res) {
               html({ className:'USA en shopping-cart mobile-web checkout ios' },
                 head({dangerouslySetInnerHTML: { __html: `
                   ${css}
+                  <style>
+                  .iherb-responsive * {
+                      -moz-box-sizing: border-box;
+                      box-sizing: border-box;
+                  }
+                  </style>
                   ${ReactDOMServer.renderToStaticMarkup(meta({name:'viewport', content:'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'}))}
                 `}}
                 ),
