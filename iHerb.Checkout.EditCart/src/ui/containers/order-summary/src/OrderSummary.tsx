@@ -13,7 +13,10 @@ var Translator = translations.cart
 var labels = Components.OrderSummary.labels
 
 const selectorFactory = dispatch => (state, ownProps) => {
-    const toCheckout = (e) => { location.href = '/transactions/checkout' }
+    const toCheckout = (e) => { 
+        document.cookie = `ihr-lac=rturl=${location.href};domain=${location.host.match(/\.[^$]+/)[0]}`;
+        location.href = '/transactions/checkout' 
+    }
     const selectedShippingMethod = state.cart.get("selectedShippingMethod")
     const subtotal = state.workflowCart.getIn(["cart", "subTotal"])
     let shipping = ""
