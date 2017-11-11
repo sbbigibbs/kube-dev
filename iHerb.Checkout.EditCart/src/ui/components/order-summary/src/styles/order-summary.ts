@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   checkout: {
     marginTop: 16,
     padding: 16,
-    //color: "#fff",
+    color: "#fff",
     backgroundColor: "#ff8a00"
   },
   text: {

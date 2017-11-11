@@ -39,8 +39,8 @@ export default class OrderSummary extends React.Component {
             <Text style={styles.value}>{orderTotal}</Text>
         </View>
         <Text style={styles.hr}></Text>
-        <View style={styles.checkout}>
-          <Text onPress={toCheckout} style={styles.text}>{labels.ttlCheckout}</Text>
+        <View>
+          <Text onPress={toCheckout} style={[ styles.checkout, styles.text ]}>{labels.ttlCheckout}</Text>
         </View>
       </View>
     );
