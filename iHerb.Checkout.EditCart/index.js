@@ -338,6 +338,8 @@ function header(req, country,  language, currency, cb) {
 
       if(name) {
         $('.iherb-hamburger-menu-account-name').text(name)
+        $('.logged-in').removeClass('hide')
+        $('.logged-out').addClass('hide')
         $('.iherb-my-account').html('<i class="icon-myaccountmobile iherb-account-login"></i>')
       }
 
