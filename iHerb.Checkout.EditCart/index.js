@@ -2,6 +2,7 @@ var http = require('http'),
     https = require('https'),
     chokidar = require('chokidar'),
     checksum = require('checksum'),
+    cheerio = require('cheerio'),
     //cartItem = require('./dist/ui/components/cart-item/src/index')
     //renderer = require('./lib/render')
     fs = require('fs'),
@@ -155,7 +156,7 @@ http.createServer(function(req, res) {
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
     jsbundle(js => {
       cssbundle(css => {
-        header(country, language, currency, (headerHtml) => {
+        header(req, country, language, currency, (headerHtml) => {
           footer(country, language, currency, (footerHtml) => {
             //console.log(footerHtml)
             var htmlRes = ReactDOMServer.renderToStaticMarkup(
@@ -307,7 +308,7 @@ function forwardHttp(base, req, cb) {
 }
 
 
-function header(country,  language, currency, cb) {
+function header(req, country,  language, currency, cb) {
   var options = {
     host: host,
     port: 443,
@@ -324,7 +325,24 @@ function header(country,  language, currency, cb) {
       body += data;
     });
     res.on("end", () => {
-      cb(body);
+      const $ = cheerio.load(body)
+      //shopping-cart-amount
+      //iherb-hamburger-menu-account-name
+      var cookies = parseCookies(req);
+      
+      var temse = cookies['ihr-temse'],
+          inventory = temse && temse['bi'],
+          temp = cookies['ihr-session-id1'],
+          wel = temp && temp['wel'],
+          name = wel && Buffer.from(wel, 'base64').toString();
+
+      if(name)
+        $('.iherb-hamburger-menu-account-name').text(name)
+
+      if(inventory)
+        $('.shopping-cart-amount').text(inventory)
+
+      cb($.html());
     });
   });
 }
