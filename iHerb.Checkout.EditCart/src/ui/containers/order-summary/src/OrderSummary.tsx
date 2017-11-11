@@ -10,9 +10,10 @@ var workflowCart = selectors.root.workflowCart
 var shippingMethods = selectors.root.shippingMethods
 var config = selectors.root.config
 var Translator = translations.cart
-var labels = Components.CartItem.labels
+var labels = Components.OrderSummary.labels
 
 const selectorFactory = dispatch => (state, ownProps) => {
+    const onCheckout = (e) => { location.href = '/transactions/checkout' }
     const selectedShippingMethod = state.cart.get("selectedShippingMethod")
     const subtotal = state.workflowCart.getIn(["cart", "subTotal"])
     let shipping = ""
@@ -30,7 +31,8 @@ const selectorFactory = dispatch => (state, ownProps) => {
         tax: state.workflowCart.getIn(["cart", "tax"]),
         rewards: state.workflowCart.getIn(["cart", "rewards"]),
         orderTotal,
-        labels: translator.translateLabels(labels)
+        labels: translator.translateLabels(labels),
+        onCheckout
     }
 }
 

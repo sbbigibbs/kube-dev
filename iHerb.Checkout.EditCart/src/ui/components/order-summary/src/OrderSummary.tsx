@@ -12,7 +12,8 @@ export default class OrderSummary extends React.Component {
       tax,
       rewards,
       orderTotal,
-      labels
+      labels,
+      toCheckout
     } = this.props
 
     return (
@@ -39,7 +40,7 @@ export default class OrderSummary extends React.Component {
         </View>
         <Text style={styles.hr}></Text>
         <View style={styles.checkout}>
-          <Text style={styles.text}>{labels.ttlCheckout}</Text>
+          <Text onPress={toCheckout} style={styles.text}>{labels.ttlCheckout}</Text>
         </View>
       </View>
     );
