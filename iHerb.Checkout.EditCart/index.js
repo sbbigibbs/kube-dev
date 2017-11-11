@@ -163,7 +163,7 @@ http.createServer(function(req, res) {
               html({ className:'USA en shopping-cart mobile-web checkout ios' },
                 head({dangerouslySetInnerHTML: { __html: `
                   ${css}
-                  <style>
+                  <style type="text/css">
                   .iherb-responsive * {
                       -moz-box-sizing: border-box;
                       box-sizing: border-box;
