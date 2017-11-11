@@ -336,8 +336,9 @@ function header(req, country,  language, currency, cb) {
           wel = temp && temp['wel'],
           name = wel && Buffer.from(wel, 'base64').toString();
 
-      if(name)
+      if(name) {
         $('.iherb-hamburger-menu-account-name').text(name)
+        $('.icon-myacccountmobile').addClass('iherb-account-login')
 
       if(inventory)
         $('.iherb-shopping-cart').append(`<span class="shopping-cart-amount">${inventory}</span>`)
