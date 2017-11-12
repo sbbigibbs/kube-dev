@@ -199,7 +199,7 @@ http.createServer(function(req, res) {
               // script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'}),
               // script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'}),
               div({dangerouslySetInnerHTML: { __html: js}}),
-              script({src: bundlePath})
+              script({src: '.' + bundlePath})
               //script({src: 'http://localhost:8080/bundle.web.js'}),
              // script({src: 'https://s.images-iherbtest.com/m/js/app.mobile.min_4c26b94a7311f3ed0519687f2338059e.js'})
             )))
