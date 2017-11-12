@@ -37,7 +37,7 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
     if(!dev) {
       bundle = fs.readFileSync('./dist/bundle.web.js');
       sum = checksum(bundle);
-      bundlePath = './public/bundle.' + sum + '.js';
+      bundlePath = '/public/bundle.' + sum + '.js';
     } 
 
 //var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
@@ -245,6 +245,7 @@ http.createServer(function(req, res) {
   console.log("Checkout API: " + checkout)
   console.log("MyAccount API: " + myaccount)
   console.log("Content API: " + content)
+  console.log("Bundle Path: " + bundlePath)
   console.log('Listening on 3000...')
 })
 
