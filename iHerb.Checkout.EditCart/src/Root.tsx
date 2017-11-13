@@ -62,13 +62,13 @@ export const run = (props) => {
 
     const navigator = store => next => action => {
         if(action.type === "GO_TO_CART")
-            history.push("/")
+            history.push("./")
 
         if(action.type === "GO_TO_WISHLIST")
-            history.push("/wishlist")
+            history.push("./wishlist")
 
         if(action.type === "GO_TO_RECYCLE_BIN")
-            history.push("/recyclebin")
+            history.push("./recyclebin")
 
         next(action)
     }
@@ -161,9 +161,9 @@ export const run = (props) => {
                 <Containers.Navigation />
                 <Router history={history}>
                     <div>
-                        <Route exact path="/" component={Containers.Cart} />
-                        <Route exact path="/wishlist" component={Wishlist} />
-                        <Route exact path="/recyclebin" component={RecycleBin} />
+                        <Route exact path="./" component={Containers.Cart} />
+                        <Route exact path="./wishlist" component={Wishlist} />
+                        <Route exact path="./recyclebin" component={RecycleBin} />
                     </div>
                 </Router>
             </div>
