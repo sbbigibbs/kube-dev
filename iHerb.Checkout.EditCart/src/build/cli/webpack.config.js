@@ -23,7 +23,7 @@ module.exports = {
         alias: {
             //'react-native': 'react-native-web',
             //'react':'preact-compat',
-            'react-dom': 'preact-compat',
+            //'react-dom': 'preact-compat',
             'react-native': 'react-native-web',
             'primitives-loader': path.join(__dirname, 'src/loaders/postcss.js'),
             'testLoader': path.resolve(__dirname, './src/webpack/lib/loaders/TestLoader.js'),
