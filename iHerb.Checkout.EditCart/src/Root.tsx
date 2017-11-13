@@ -51,6 +51,7 @@ export const run = (props) => {
         country
     } = props
 
+    const basePath = process.env.BASE_PATH || '';
     const history = createBrowserHistory()
 
     const sagaMiddleware = createSagaMiddleware()
@@ -62,13 +63,13 @@ export const run = (props) => {
 
     const navigator = store => next => action => {
         if(action.type === "GO_TO_CART")
-            history.push("./")
+            history.push(`${basePath}/`)
 
         if(action.type === "GO_TO_WISHLIST")
-            history.push("./wishlist")
+            history.push(`${basePath}/wishlist`)
 
         if(action.type === "GO_TO_RECYCLE_BIN")
-            history.push("./recyclebin")
+            history.push(`${basePath}/recyclebin`)
 
         next(action)
     }
@@ -161,9 +162,9 @@ export const run = (props) => {
                 <Containers.Navigation />
                 <Router history={history}>
                     <div>
-                        <Route exact path="./" component={Containers.Cart} />
-                        <Route exact path="./wishlist" component={Wishlist} />
-                        <Route exact path="./recyclebin" component={RecycleBin} />
+                        <Route exact path={`${basePath}/`} component={Containers.Cart} />
+                        <Route exact path={`${basePath}/wishlist`} component={Wishlist} />
+                        <Route exact path={`${basePath}/recyclebin`} component={RecycleBin} />
                     </div>
                 </Router>
             </div>
