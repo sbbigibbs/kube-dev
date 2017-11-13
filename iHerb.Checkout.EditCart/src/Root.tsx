@@ -161,7 +161,7 @@ export const run = (props) => {
                 <Containers.Navigation />
                 <Router history={history}>
                     <div>
-                        <Route exact path="/EditCart" component={Containers.Cart} />
+                        <Route exact path="/" component={Containers.Cart} />
                         <Route exact path="/wishlist" component={Wishlist} />
                         <Route exact path="/recyclebin" component={RecycleBin} />
                     </div>
