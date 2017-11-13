@@ -62,7 +62,7 @@ export const run = (props) => {
 
     const navigator = store => next => action => {
         if(action.type === "GO_TO_CART")
-            history.push("/EditCart")
+            history.push("/")
 
         if(action.type === "GO_TO_WISHLIST")
             history.push("/wishlist")
