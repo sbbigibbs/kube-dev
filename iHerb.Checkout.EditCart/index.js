@@ -24,6 +24,7 @@ var http = require('http'),
 var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.biz/v1",
     myaccount = process.env.MYACCOUNT_API_URL || "https://myaccount-api.iherbtest.biz/v1",
     content = process.env.CONTENT_URL || "https://www.iherbtest.com/content",
+    basePath = process.env.BASE_PATH || '',
     host = content.match(/\S+(?=\/\S+$)/g)[0].split('https://')[1];
     
     dev = false;//process.env.CHECKOUT_API_URL && false || true;
@@ -181,6 +182,7 @@ http.createServer(function(req, res) {
                 window._customerId = '${id}';
                 window._checkoutAPI = '${checkout}';
                 window._myaccountAPI = '${myaccount}';
+                window._basePath = '${basePath}';
                 var appPay = false;
                 window.iHerb_ActionHost = 'http://checkout4.iherbtest.com:8080';
               `}}),
