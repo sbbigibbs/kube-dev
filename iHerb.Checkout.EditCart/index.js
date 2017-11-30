@@ -1,10 +1,9 @@
 var http = require('http'),
     https = require('https'),
+    { URL } = require('url'),
     chokidar = require('chokidar'),
     checksum = require('checksum'),
     cheerio = require('cheerio'),
-    //cartItem = require('./dist/ui/components/cart-item/src/index')
-    //renderer = require('./lib/render')
     fs = require('fs'),
     path = require('path'),
     React = require('react'),
@@ -27,7 +26,7 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
     basePath = process.env.BASE_PATH || '',
     host = content.match(/\S+(?=\/\S+$)/g)[0].split('https://')[1];
     
-    dev = false;//process.env.CHECKOUT_API_URL && false || true;
+    dev = true;//process.env.CHECKOUT_API_URL && false || true;
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -35,112 +34,24 @@ var checkout = process.env.CHECKOUT_API_URL || "https://checkout-api.iherbtest.b
         sum,
         bundlePath = 'http://localhost:8080/bundle.web.js';
     
-    if(!dev) {
-      bundle = fs.readFileSync('./dist/bundle.web.js');
-      sum = checksum(bundle);
-      bundlePath = '/public/bundle.' + sum + '.js';
-    } 
+  if(!dev) {
+    bundle = fs.readFileSync('./dist/bundle.web.js');
+    sum = checksum(bundle);
+    bundlePath = '/public/bundle.' + sum + '.js';
+  } 
 
-//var temp = renderer.default(path.resolve(__dirname, './src/ui/components/cart-item/src/components/CartItem.tsx'));
+const options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
 
-// console.log(ReactDOMServer.renderToStaticMarkup(
-//   React.createElement(
-//     cartItem.default.Component, {
-//       imageSource: '',
-//       title: '',
-//       productId: '',
-//       weight: '',
-//       discountMsgList:[],
-//       price: '',
-//       quantity: '',
-//       discountsAppliedList:[],
-//       total: '',
-//       totalDiscount: '',
-//       onIncrement: () => {},
-//       onDecrement: () => {},
-//       onRequestProductQuantityChange: () => {},
-//       onCreateChangeProductQuantity: () => {},
-//       onDeleteProduct: () => {},
-//       onPostToWishlist: () => {},
-//       errorMsgList:[],
-//       labels:{
-//         weight: "",
-//         each: "",
-//         addToList: () => {},
-//         removeButton: () => {},
-//         weightLbs: [],
-//         weightKg: "" 
-//       },
-//       weightKg: [],
-//       isDiscontinued: false
-//     })))
-
-
-// chokidar.watch('./src/ui').on('change', (path, stats) => {
-//   //console.log(path, stats);
-//   var content = fs.readFileSync(path, 'utf8');
-
-//   updateContent(JSON.stringify({
-//     path,
-//     content
-//   }))
-// });
-
-// function updateContent(content) {
-  
-//   var options = {
-//     hostname:'checkout4.iherbtest.com',
-//     port: 3000,
-//     path: '/update',
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/x-www-form-urlencoded',
-//       'Content-Length': content.length
-//     }
-//   }
-
-//   var req = http.request(options, res => {
-//       res.setEncoding("utf8");
-//       let body = "";
-//       res.on("data", data => {
-//         body += data;
-//       });
-//       res.on("end", () => {
-//         console.log(body)
-//       })
-//   });
-
-//   req.on('error', (e) => {
-//     console.error(e)
-//   })
-
-//   req.write(content);
-//   req.end();
-// }
-
-http.createServer(function(req, res) {
+https.createServer(options, function(req, res) {
+  //res.writeHead(200);
   console.log(req.url);
-  
-  if (req.url == '/update') {
-    let body = "";
-
-    req.setEncoding("utf8");
-    req.on("data", data => {
-      body += data;
-    });
-
-    req.on("end", () => {
-      body = JSON.parse(body);
-
-      var content = fs.readFileSync(body.path, 'utf8');
-      if(checksum(content) !== checksum(body.content)) {
-        fs.writeFileSync(body.path, body.content)
-        res.end('changed');
-      } else {
-        res.end('not changed');
-      }
-    });
-  }
+  if(/\/cart\/public\/bundle\./g.test(req.url))
+    forwardBundle(req, res, response =>{  res.setHeader('Content-Type', 'text/javascript');res.end(response) })
+  else if(req.url !== '/favicon.ico')
+    forwardHttps(req, (response, cookies) => { cookies && res.setHeader('set-cookie', cookies); res.end(response) })
 
   if (req.url == '/') {
 
@@ -201,7 +112,7 @@ http.createServer(function(req, res) {
               // script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'}),
               // script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'}),
               div({dangerouslySetInnerHTML: { __html: js}}),
-              script({src: '.' + bundlePath})
+              script({src: bundlePath})
               //script({src: 'http://localhost:8080/bundle.web.js'}),
              // script({src: 'https://s.images-iherbtest.com/m/js/app.mobile.min_4c26b94a7311f3ed0519687f2338059e.js'})
             )))
@@ -211,10 +122,7 @@ http.createServer(function(req, res) {
         })
       })
     })
-  } //else  {
-  //   forward('checkout.iherbtest.com', req, response => res.end(response))
-  // }
-  else if (req.url == bundlePath) {
+  } else if (req.url == bundlePath) {
 
     res.setHeader('Content-Type', 'text/javascript')
     if(dev)
@@ -224,25 +132,15 @@ http.createServer(function(req, res) {
     
   } else if (req.url == bundlePath + '.map') {
     
-        res.setHeader('Content-Type', 'text/javascript')
-        if(dev)
-          forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
-        else
-          res.end()
-  }   //else if(req.url.split('/')[1] =="public") {
-  //   console.log(req.url)
-  //   req.url = req.url.split('public')[1];
-  //   req.host = 'localhost'
-  //   forward('localhost', req, response => res.end(response))
-  // }
-  // } else {
-  //   forward('checkout.iherbtest.com', req, response => res.end(response))
-  //   //res.statusCode = 404
-  //   //res.end()
-  // }
+    res.setHeader('Content-Type', 'text/javascript')
+    if(dev)
+      forwardHttp('localhost:8080/bundle.web.js.map', '', response => res.end(response))
+    else
+      res.end()
+  } 
 
 // The http server listens on port 3000
-}).listen(3000, function(err) {
+}).listen(443, function(err) {
   if (err) throw err
   console.log("Checkout API: " + checkout)
   console.log("MyAccount API: " + myaccount)
@@ -300,6 +198,48 @@ function forward(base, req, cb) {
   
 }
 
+function forwardBundle(req, res, cb) {
+  
+  if(/\.map$/g.test(req.url)){
+    res.writeHead(302, {'Location': 'https://localhost:8080/bundle.web.js.map'});
+    res.end();
+    //forwardBundleSecure('/bundle.web.js.map', req, cb)
+  }
+  else {
+    res.writeHead(302, {'Location': 'https://localhost:8080/bundle.web.js'});
+    res.end();
+    //forwardBundleSecure('/bundle.web.js', req, cb)
+  }
+}
+
+function forwardBundleSecure(path, req, cb) {
+  
+  var options = {
+    hostname: 'localhost',
+    port: 8080,
+    path: path,
+    method: req.method,
+    agent: false
+  };
+  const request = https.request(options, (res) => {
+    console.log('statusCode:', res.statusCode);
+    console.log('headers:', res.headers);
+    res.setEncoding("utf8");
+    let body = "";
+    res.on("data", data => {
+      body += data;
+    });
+    res.on("end", () => {
+      cb(body)
+    });
+  });
+  
+  request.on('error', (e) => {
+    console.error(e);
+  });
+  request.end();
+}
+
 function forwardHttp(base, req, cb) {
   
   const url = base + (req && req.url)
@@ -317,6 +257,33 @@ function forwardHttp(base, req, cb) {
   });
 }
 
+function forwardHttps(req, cb) {
+  var options = {
+    hostname: 'localhost',
+    port: 4443,
+    path: req.url,
+    method: req.method,
+    agent: false
+  };
+  const request = https.request(options, (res) => {
+    console.log('statusCode:', res.statusCode);
+    console.log('headers:', res.headers);
+    res.setEncoding("utf8");
+    let body = "";
+    res.on("data", data => {
+      body += data;
+    });
+    res.on("end", () => {
+      cb(body, res.headers['set-cookie'] && res.headers['set-cookie'].map(cookie => 
+        cookie.replace(/domain=[^;]+/g, 'domain=localhost')))
+    });
+  });
+  
+  request.on('error', (e) => {
+    console.error(e);
+  });
+  request.end();
+}
 
 function header(req, country,  language, currency, cb) {
   var options = {

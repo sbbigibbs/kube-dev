@@ -1,11 +1,11 @@
 import {connectAdvanced} from "react-redux"
 import {createSelector} from "reselect"
-import Components from "iherb-components"
-import selectors from "iherb-selectors"
-import redux from "iherb-redux";
+import {WishlistItems} from "iherb-components"
+import {root} from "iherb-selectors"
+import {workflowCart} from "iherb-redux";
 import * as toJS from "immutable"
 
-export const selectorFactory = dispatch => createSelector([selectors.root.wishlist], (...args) => {
+export const selectorFactory = dispatch => createSelector([root.wishlist], (...args) => {
   const [
     wishlist
   ] = args
@@ -13,10 +13,10 @@ export const selectorFactory = dispatch => createSelector([selectors.root.wishli
   const folderList = wishlist.getIn(["data", "folderList"]).toJS()
   const folderName = wishlist.getIn(["data", "fn"])
   const onSelectWishlistDropdown = () => dispatch(
-    redux.workflowCart.actions.displayWishlistSelection()
+    workflowCart.actions.displayWishlistSelection()
   )
   const onSelectWishlist =(selectedList) => dispatch(
-    redux.workflowCart.actions.selectWishlist(selectedList)
+    workflowCart.actions.selectWishlist(selectedList)
   )
 
   const folderNames = folderList.map(folder => {
@@ -51,4 +51,4 @@ export const selectorFactory = dispatch => createSelector([selectors.root.wishli
   }
 })
 
-export default connectAdvanced(selectorFactory)(Components.WishlistItems)
+export default connectAdvanced(selectorFactory)(WishlistItems)

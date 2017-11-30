@@ -10,7 +10,7 @@ import {PostToWishListService} from './post-to-wishlist/src/index'
 import {UpdateProdQtyService} from './update-product-quantity/src/index'
 import {UpdateShippingMethodService} from './update-shipping-method/src/index'
 
-export default {
+export {
     ApplyCouponCodeService,
     DeleteCouponService,
     DeleteProductService,

@@ -28,7 +28,7 @@ export default (props) => {
     <Text style={styles.grey14}>Type in your zip code and click on 'Calculate'.</Text>
     <View style={styles.actions}>
         <input style={styles.textInput}
-            onChangeText={onChangeZipCode}
+            onChange={onChangeZipCode}
             placeholder="Zip/Postal Code"
             value={zipcode} />
             

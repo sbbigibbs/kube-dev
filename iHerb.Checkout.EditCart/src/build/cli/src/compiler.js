@@ -7,17 +7,18 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const moduleConfig = require('../webpack.config.module.js');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var http = require('http');
+var findSyms = require('./symlinks');
 var express = require('express');
 var app = express();
 
-function getEntry(name, src, dev) {
+function getEntry(name, src, dev, modules) {
     var entry = {};
     entry[name] = [];
 
     if(dev) {
         entry[name].push('babel-polyfill'),
         entry[name].push('react-hot-loader/patch');
-        entry[name].push('webpack-dev-server/client?http://localhost:8080'); //http://checkout4.iherbtest.com:3000/public');
+        entry[name].push('webpack-dev-server/client?https://localhost:8080'); //http://checkout4.iherbtest.com:3000/public');
         entry[name].push('webpack/hot/only-dev-server');
     } else {
         entry[name].push('babel-polyfill')
@@ -41,10 +42,14 @@ function build(src, output, modules, dev, watch) {
 //             },
 //         }))
 //   }
+    var links = findSyms(path.resolve(process.cwd(), './node_modules'))
+    var entry = getEntry('web', src, dev, modules);
 
-    moduleConfig.entry = getEntry('.web', src, dev);
+    moduleConfig.entry = entry
     moduleConfig.watch = watch;
-    config.entry = getEntry('.web', src, dev);
+    moduleConfig.output.path = path.join(process.cwd(), output)
+    config.entry = entry;
+    config.resolve.alias = { ...config.resolve.alias, ... links } 
     config.watch = watch;
 
 
@@ -60,16 +65,32 @@ function build(src, output, modules, dev, watch) {
             hotOnly: true,
             inline: true,
             host: 'localhost',
-            port: 8080
+            port: 8080,
+            https: {
+                key: fs.readFileSync('key.pem'),
+                cert: fs.readFileSync('cert.pem')
+            }
         }
-        
+        // config.externals = [
+        //     function(context, request, callback) {
+        //         if (context.indexOf('node_modules') !== -1){
+        //           return callback(null, 'commonjs ' + request);
+        //         } 
+        //         callback();
+        //       }
+        // ]
     } else {
         config.plugins.push(
             new UglifyJSPlugin({}))
+        config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+            name: '.common',
+            minChunks: module => module.context && module.context.indexOf('node_modules') !== -1
+          }))
     }
     
     var compiler = webpack(config);
-    var modCompiler = webpack(moduleConfig);
+    if(modules)
+        compiler = webpack(moduleConfig);
 
     if(dev) {
        const server = new WebpackDevServer(compiler, {
@@ -84,6 +105,10 @@ function build(src, output, modules, dev, watch) {
             stats: {
                 colors: true,
             },
+            https: {
+                key: fs.readFileSync('key.pem'),
+                cert: fs.readFileSync('cert.pem')
+            }
             //clientLogLevel: "none",
             //watchContentBase: true
             // watchOptions: {
@@ -102,6 +127,7 @@ function build(src, output, modules, dev, watch) {
             if (err) {
                 console.log(err);
             }
+            console.log(stats)
         })
     }
 }

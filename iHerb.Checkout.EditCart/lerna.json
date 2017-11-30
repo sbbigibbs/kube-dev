@@ -1,0 +1,17 @@
+{
+    "lerna": "2.1.0",
+    "packages": [
+        "src/ui/api/",
+        "src/ui/components/",
+        "src/ui/containers/",
+        "src/ui/redux/",
+        "src/ui/selectors/",
+        "src/ui/translations/",
+        "src/ui/primitives/",
+        "src/ui/middleware/",
+        "src/ui/pages/",
+        "./"
+    ],
+    "version": "0.0.0"
+  }
+  

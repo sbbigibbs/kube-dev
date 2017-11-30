@@ -1,0 +1,23 @@
+{
+    "name": "iherb-containers",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "scripts": {
+      "prepublish": "tsc"
+    },
+    "description": "Primitive React cart item component across targets",
+    "author": {
+      "email": "jonathan.nacionales@iherb.net",
+      "name": "Jonathan Nacionales",
+      "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+    },
+    "dependencies": {
+      "iherb-components": "^1.0.0",
+      "iherb-redux": "^1.0.0",
+      "iherb-selectors": "^1.0.0",
+      "iherb-translations": "^1.0.0"
+    },
+    "devDependencies": {
+    }
+}

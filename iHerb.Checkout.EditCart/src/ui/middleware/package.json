@@ -1,28 +1,20 @@
 {
-  "name": "@iherb/ui-redux-mw-action-handlers",
-  "version": "1.3.25",
-  "main": "lib",
-  "license": "MIT",
-  "author": {
-    "email": "jonathan.nacionales@iherb.net",
-    "name": "Jonathan Nacionales",
-    "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
-  },
-  "dependencies": {
-    "@iherb/ui-redux-workflow-cart": "^1.3.25"
-  },
-  "devDependencies": {
-    "@iherb/ui-tools-cli": "^1.3.24",
-    "rimraf": "^2.6.2"
-  },
-  "scripts": {
-    "prepublish": "npm run clean && npm run compile && npm run build",
-    "build": "iherb-ui-tools build --modules -o ./lib -s ./src/index.js --src src --library-target commonjs --output-name UIComponentCartItem --platforms web",
-    "compile": "babel src -d lib --ignore **/__tests__",
-    "clean": "rimraf ./lib",
-    "release": "npm run clean && npm run compile && npm run build && npm publish",
-    "start": "iherb-ui-tools start -o ./dist -s ./examples/web/index.js --public ./examples/web/public --html ./examples/web/public/index.html --src examples/web,src --module-resolver-alias-name @iherb/ui-component-cart-item --module-resolver-alias-val ./src --platforms web",
-    "test": "jest",
-    "test:watch": "jest --watch"
-  }
+    "name": "iherb-middleware",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "scripts": {
+      "prepublish": "tsc"
+    },
+    "description": "Primitive React cart item component across targets",
+    "author": {
+      "email": "jonathan.nacionales@iherb.net",
+      "name": "Jonathan Nacionales",
+      "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+    },
+    "dependencies": {
+      "iherb-redux": "^1.0.0"
+    },
+    "devDependencies": {
+    }
 }

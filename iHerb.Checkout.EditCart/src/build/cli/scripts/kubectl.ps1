@@ -1,0 +1,1 @@
+kubectl --kubeconfig=./src/build/cli/scripts/config port-forward -n=checkout "$(kubectl --kubeconfig=./src/build/cli/scripts/config -n=checkout get pods -l k8s-app=nginx-ingress-lb -o=jsonpath='{.items..metadata.name}')" 4443:443

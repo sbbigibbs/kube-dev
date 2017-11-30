@@ -1,0 +1,19 @@
+{
+    "name": "iherb-components",
+    "version": "1.0.0",
+    "main": "lib/index.js",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "scripts": {
+      "prepublish": "tsc"
+    },
+    "description": "Primitive React cart item component across targets",
+    "author": {
+      "email": "jonathan.nacionales@iherb.net",
+      "name": "Jonathan Nacionales",
+      "url": "https://gitlab.iherb.net/u/jonathan.nacionales"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}

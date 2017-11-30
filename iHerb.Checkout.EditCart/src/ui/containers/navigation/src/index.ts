@@ -1,8 +1,8 @@
 import React from "react"
 import {connectAdvanced} from "react-redux"
 import {createSelector} from "reselect"
-import redux from "iherb-redux"
-import Components from "iherb-components"
+import { workflowCart} from "iherb-redux"
+import { Navigation } from "iherb-components"
 
 export const selectorFactory = dispatch => state => {
     const cartSize = state.workflowCart.getIn(['cart', 'prodList']).toJS().length
@@ -19,7 +19,7 @@ export const selectorFactory = dispatch => state => {
     })
 
     const toggleActiveTab = (tab) => {
-      dispatch(redux.workflowCart.actions.toggleTab(tab))
+      dispatch(workflowCart.actions.toggleTab(tab))
     }
 
     const currentTab = state.workflowCart.get('selectedTab')
@@ -61,4 +61,4 @@ export const selectorFactory = dispatch => state => {
     }
 }
 
-export default connectAdvanced(selectorFactory)(Components.Navigation)
+export default connectAdvanced(selectorFactory)(Navigation)

@@ -4,7 +4,7 @@ import orderSummary from './order-summary/src/index'
 import products from './products/src/index'
 import root from './root/src/index'
 
-export default {
+export {
     cart,
     cartItems,
     orderSummary,

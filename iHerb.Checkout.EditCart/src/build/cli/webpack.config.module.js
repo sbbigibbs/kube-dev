@@ -12,9 +12,9 @@ module.exports = {
         filename: "bundle[name].js",
         chunkFilename: 'chunk[name].js',
         path: path.join(process.cwd(), "/dist"),
-        publicPath: 'http://localhost:3000/',
-        //libraryTarget: "commonjs-module"
-        libraryTarget: 'commonjs2'
+        //publicPath: 'http://localhost:3000/',
+        //libraryTarget: "var"
+        //libraryTarget: 'commonjs2'
     },
     
     devtool: "source-map",
@@ -114,6 +114,11 @@ module.exports = {
           
             // minChunks: 3,
             // (3 children must share the module before it's separated)
+            name: 'node-static',
+            minChunks(module, count) {
+                var context = module.context;
+                return context && context.indexOf('node_modules') >= 0;
+            }
           }),
         new webpack.DefinePlugin({
             'process.env': {
@@ -121,6 +126,7 @@ module.exports = {
 
             }
         }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.LoaderOptionsPlugin({
             debug: true
           })

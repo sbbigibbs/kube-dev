@@ -3,6 +3,8 @@ import StyleSheet from '../../stylesheet/index';
 import View from '../../view/src/View';
 import ImageResizeMode from './mode'
 
+declare var global: any
+
 const STATUS_ERRORED = 'ERRORED';
 const STATUS_LOADED = 'LOADED';
 const STATUS_LOADING = 'LOADING';
@@ -102,7 +104,6 @@ class Image extends React.Component {
     props: any
     state: any
     resizeMode: any
-    setState: any
     _image: any
     
   static prefetch(url) {

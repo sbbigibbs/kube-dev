@@ -13,7 +13,7 @@ import Navigation from './navigation/src/index'
 import WishlistItem from './wishlist-item/src/index'
 import WishlistItems from './wishlist-items/src/index'
 
-export default {
+export {
     CartItem,
     CartItems,
     ErrorBox,

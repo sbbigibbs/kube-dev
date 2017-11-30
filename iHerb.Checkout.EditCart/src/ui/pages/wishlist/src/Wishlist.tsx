@@ -1,6 +1,6 @@
 import React from "react"
 import { View, Text } from 'react-primitives'
-import Containers from 'iherb-containers'
+import {Wishlist} from 'iherb-containers'
 import {connectAdvanced} from "react-redux"
 
 export const Component =  ({isEmpty}) => {
@@ -10,7 +10,7 @@ export const Component =  ({isEmpty}) => {
         </View>
 
     return <View>
-        <Containers.Wishlist />
+        <Wishlist />
     </View>
 }
 

@@ -1,8 +1,8 @@
-import redux from "iherb-redux"
+import { workflowCart } from "iherb-redux"
 import co from "co"
 
-var actionTypes = redux.workflowCart.actionTypes
-var actions = redux.workflowCart.actions
+var actionTypes = workflowCart.actionTypes
+var actions = workflowCart.actions
 
 export const DeleteProductHandler = props => store => next => action => co(function*(){
     const {

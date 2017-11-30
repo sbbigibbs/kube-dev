@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2015",
+        "outDir": "./lib",
+        "allowSyntheticDefaultImports": true,
+        "allowJs": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "declaration": false,
+        "jsx": "react-native"
+    },
+    "files": [
+        "./src/compiler.ts",
+        "./src/server/util/debuggerWorker.ts"
+    ]
+}

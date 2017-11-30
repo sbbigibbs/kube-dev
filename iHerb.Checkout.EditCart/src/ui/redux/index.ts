@@ -5,7 +5,7 @@ import workflowCart from './workflow-cart/src/index'
 import wishlist from './wishlist/src/index'
 import shipping from './shipping/src/index'
 
-export default {
+export {
     cart,
     products,
     config,

@@ -9,7 +9,6 @@ import { dropdownStyles, styles } from "../styles/cart-item"
 export default class CartItem extends React.Component {
   state: any
   props: any
-  setState: any
   constructor(props) {
     super(props);
     this.state = {value: props.quantity};

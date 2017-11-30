@@ -1,0 +1,17 @@
+{
+    "name": "iherb-tools-cli",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "build": "tsc -w"
+    },
+    "author": "",
+    "license": "ISC",
+    "bin": {
+      "iherb-tools-cli": "./index.js"
+    },
+    "dependencies": {
+    }
+  }
+  

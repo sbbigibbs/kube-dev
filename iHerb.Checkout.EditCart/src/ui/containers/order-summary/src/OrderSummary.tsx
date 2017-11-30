@@ -1,16 +1,15 @@
 import {connectAdvanced} from "react-redux"
 import {createSelector} from "reselect"
-import Components from 'iherb-components';
-import selectors from 'iherb-selectors';
-import translations from 'iherb-translations';
+import { OrderSummary } from 'iherb-components';
+import { orderSummary, root } from 'iherb-selectors';
+import * as translations from 'iherb-translations';
 
-var orderSummarySelector = selectors.orderSummary
-var OrderSummary = Components.OrderSummary.Component;
-var workflowCart = selectors.root.workflowCart
-var shippingMethods = selectors.root.shippingMethods
-var config = selectors.root.config
+var orderSummarySelector = orderSummary
+var workflowCart = root.workflowCart
+var shippingMethods = root.shippingMethods
+var config = root.config
 var Translator = translations.cart
-var labels = Components.OrderSummary.labels
+var labels = OrderSummary.labels
 
 const selectorFactory = dispatch => (state, ownProps) => {
     const toCheckout = (e) => { 
@@ -39,4 +38,4 @@ const selectorFactory = dispatch => (state, ownProps) => {
     }
 }
 
-export default connectAdvanced(createSelector([ workflowCart, shippingMethods, config ], selectorFactory))(OrderSummary)
+export default connectAdvanced(createSelector([ workflowCart, shippingMethods, config ], selectorFactory))(OrderSummary.Component)

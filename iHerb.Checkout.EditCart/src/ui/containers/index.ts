@@ -9,7 +9,7 @@ import Navigation from './navigation/src'
 import Wishlist from './wishlist/src/index'
 //import WishlistBox from './wishlist-box/src/index'
 
-export default {
+export {
     Cart,
     CartItems,
     OrderSummary,

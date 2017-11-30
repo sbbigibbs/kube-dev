@@ -1,9 +1,9 @@
 import React from "react"
 import { View } from 'react-primitives';
-import {connectAdvanced} from "react-redux"
-import {createSelector} from "reselect"
-import selectors from "iherb-selectors"
-import redux from "iherb-redux"
+import { connectAdvanced } from "react-redux"
+import { createSelector } from "reselect"
+import { root } from "iherb-selectors"
+import { workflowCart } from "iherb-redux"
 import * as toJS from "immutable"
 import languages from "./languages"
 
@@ -18,7 +18,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DropDownMenu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Components from "iherb-components"
+import { ShippingCountrySelector, MobileCountrySelector } from "iherb-components"
 
 
 const dropdownStyles = {
@@ -46,7 +46,7 @@ const dropdownStyles = {
     }
   };
 
-export const selectorFactory = dispatch => createSelector([ selectors.root.workflowCart ], (...args) => {
+export const selectorFactory = dispatch => createSelector([ root.workflowCart ], (...args) => {
     const [
         workflowCart
     ] = args
@@ -55,8 +55,8 @@ export const selectorFactory = dispatch => createSelector([ selectors.root.workf
     console.log('countryList inside countryList container')
     const zipCode = workflowCart.get("zipcode")
     const onUpdateShippingCountry = (country, requiresZip, countryCode) => {
-        dispatch(redux.workflowCart.actions.updateShippingCountry(country, requiresZip, countryCode))
-        if(!requiresZip) dispatch(redux.workflowCart.actions.getShippingMethods(zipCode, countryCode))
+        dispatch(workflowCart.actions.updateShippingCountry(country, requiresZip, countryCode))
+        if(!requiresZip) dispatch(workflowCart.actions.getShippingMethods(zipCode, countryCode))
     }
     return {
         countryList,
@@ -66,7 +66,7 @@ export const selectorFactory = dispatch => createSelector([ selectors.root.workf
 
 export default connectAdvanced(selectorFactory)(props => <View>
     {props.countryList.map(country =>
-        <Components.ShippingCountrySelector
+        <ShippingCountrySelector
             countryCode={country.code}
             countryName={country.name} 
             requiresZip={country.requiresZip}
@@ -78,7 +78,7 @@ export default connectAdvanced(selectorFactory)(props => <View>
 export const MobileWebCountryList = connectAdvanced(selectorFactory)(props => 
     <View>
         {props.countryList.map(country =>
-        <Components.MobileCountrySelector
+        <MobileCountrySelector
             countryCode={country.code}
             countryName={country.name} 
             requiresZip={country.requiresZip}

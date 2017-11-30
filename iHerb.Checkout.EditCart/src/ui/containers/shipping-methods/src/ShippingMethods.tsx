@@ -2,13 +2,11 @@ import React from "react"
 import { View } from 'react-primitives';
 import {connectAdvanced} from "react-redux"
 import {createSelector} from "reselect"
-import redux from 'iherb-redux';
-import Components from 'iherb-components';
-import selectors from 'iherb-selectors';
+import { cart } from 'iherb-redux';
+import { ShippingMethod } from 'iherb-components';
 
-var ShippingMethod = Components.ShippingMethod
-var cartWorkflow = redux.cart
-var actions = redux.cart.actions
+var cartWorkflow = cart
+var actions = cart.actions
 
 const styles = { shippingMethod:{}, shippingMethods:{} }
 const selectorFactory = dispatch => (state, ownProps) => {

@@ -1,16 +1,15 @@
 import {connectAdvanced} from "react-redux"
 import {createSelector} from "reselect"
-import redux from 'iherb-redux';
-import selectors from 'iherb-selectors';
-import Components from 'iherb-components';
+import { cart } from 'iherb-redux';
+import { root } from 'iherb-selectors';
+import { ShippingEstimates } from 'iherb-components';
 import translations from 'iherb-translations';
 
-var ShippingEstimates = Components.ShippingEstimates.Component
-var workflowCart = selectors.root.workflowCart
-var config = selectors.root.config
-var actions = redux.cart.actions
+var workflowCart = root.workflowCart
+var config = root.config
+var actions = cart.actions
 var Translator = translations.cart
-var labels = Components.ShippingEstimates.labels
+var labels = ShippingEstimates.labels
 
 export const selectorFactory = dispatch => createSelector([ workflowCart, config ], (...args) => {
     const [
@@ -45,4 +44,4 @@ export const selectorFactory = dispatch => createSelector([ workflowCart, config
     }
 })
 
-export default connectAdvanced(selectorFactory)(ShippingEstimates)
+export default connectAdvanced(selectorFactory)(ShippingEstimates.Component)

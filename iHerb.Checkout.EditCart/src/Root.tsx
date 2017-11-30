@@ -1,15 +1,34 @@
 import React from "react"
 import {render} from "react-dom"
-import Containers from "./ui/containers/index"
-import sagas from './ui/sagas/index'
-import redux from './ui/redux/index'
+//import {Cart, Navigation } from "iherb-containers"
+import loadContainers from "iherb-containers"
+import { 
+    cart,
+    shipping,
+    products,
+    workflowCart,
+    config,
+    wishlist} from 'iherb-redux'
 import {createStore, combineReducers, applyMiddleware} from "redux"
-import createSagaMiddleware from 'redux-saga'
 import { Router, Route } from "react-router-dom"
 import { createBrowserHistory } from "history"
 import {Provider} from "react-redux"
-import api from 'iherb-api'
-import {Wishlist} from 'iherb-pages'
+import {
+    GetShoppingCartService,
+    ApplyCouponCodeService,
+    UpdateProdQtyService,
+    DeleteCouponService,  
+    DeleteProductService,
+    GetCountryListService,
+    GetShippingMethodsService,
+    GetWishListService,
+    PostToWishListService,
+    UpdateShippingMethodService,
+    GetAnonUserCart
+
+} from 'iherb-api'
+import loadPages from 'iherb-pages'
+//import {Wishlist} from 'iherb-pages'
 import { LoadPageHandler, 
     ApplyCouponCodeHandler, 
     ChangeProductQuantityHandler, 
@@ -25,20 +44,6 @@ import { LoadPageHandler,
 } from "iherb-middleware"
 const co = require("co")
 
-const {
-    GetShoppingCartService,
-    ApplyCouponCodeService,
-    UpdateProdQtyService,
-    DeleteCouponService,  
-    DeleteProductService,
-    GetCountryListService,
-    GetShippingMethodsService,
-    GetWishListService,
-    PostToWishListService,
-    UpdateShippingMethodService,
-    GetAnonUserCart
-
-} = api
 
 export const run = (props) => {
     const {
@@ -54,7 +59,6 @@ export const run = (props) => {
 
     const history = createBrowserHistory()
 
-    const sagaMiddleware = createSagaMiddleware()
     const log = []
     const logger = store => next => (action): any =>  {
         log.push(action)
@@ -124,7 +128,6 @@ export const run = (props) => {
         return [
             logger,
             navigator,
-            sagaMiddleware,
             ...actionHandlers
         ]
 
@@ -132,47 +135,45 @@ export const run = (props) => {
 
     const store = createStore(
         combineReducers({
-            cart: redux.cart.reducer,
-            shippingMethods: redux.shipping.reducer,
-            products: redux.products.reducer,
-            workflowCart: redux.workflowCart.reducer,
-            config: redux.config.reducer,
-            wishlist: redux.wishlist.reducer
+            cart: cart.reducer,
+            shippingMethods: shipping.reducer,
+            products: products.reducer,
+            workflowCart: workflowCart.reducer,
+            config: config.reducer,
+            wishlist: wishlist.reducer
         }),
         applyMiddleware(...middleware))
-    
-        // sagaMiddleware.run(sagas.loadPageSaga)
-        // sagaMiddleware.run(sagas.getShippingMethodsSaga)
-        // sagaMiddleware.run(sagas.changeProductQuantitySaga)
-        // sagaMiddleware.run(sagas.updateShippingMethodSaga)
-        // sagaMiddleware.run(sagas.deleteProductSaga)
-        // sagaMiddleware.run(sagas.errorThrownSaga)
-        // sagaMiddleware.run(sagas.applyCouponCodeSaga)
-        // sagaMiddleware.run(sagas.deleteCouponCodeSaga)
-        // sagaMiddleware.run(sagas.getCountryListSaga)
-        // sagaMiddleware.run(sagas.postToWishlistSaga)
-        //sagaMiddleware.run(sagas.getRecommendationsSaga)
-        //sagaMiddleware.run(sagas.getWishlistSaga)
 
     const RecycleBin = () => <div>Recycle Bin</div>
-    
-    render(
-        <Provider store={store}>
+
+    const getRoutes = async () => {
+        const Containers = await loadContainers
+        const Pages = await loadPages
+        const Cart = Containers.Cart
+        const Navigation = Containers.Navigation
+        const Wishlist = Pages.Wishlist
+
+        return <Provider store={store}>
             <div>
-                <Containers.Navigation />
+                <Navigation />
                 <Router history={history}>
                     <div>
-                        <Route exact path={`${basePath}/`} component={Containers.Cart} />
+                        <Route exact path={`${basePath}/`} component={Cart} />
                         <Route exact path={`${basePath}/wishlist`} component={Wishlist} />
                         <Route exact path={`${basePath}/recyclebin`} component={RecycleBin} />
                     </div>
                 </Router>
             </div>
-        </Provider>,
-        document.getElementById("root")
-    )
+        </Provider>
+    }
+    
+    getRoutes().then(routes =>
+        render(
+            routes,
+            document.getElementById("root"))
+        )
 
-    store.dispatch(redux.workflowCart.actions.loadPage({
+    store.dispatch(workflowCart.actions.loadPage({
         checkoutApi,
         myAccountApi,
         anonymousToken,

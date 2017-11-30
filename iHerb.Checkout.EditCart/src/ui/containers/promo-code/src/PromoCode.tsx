@@ -2,16 +2,15 @@ import {connectAdvanced} from "react-redux"
 import {createSelector} from "reselect"
 import * as toJS from "immutable"
 import redux from 'iherb-redux';
-import Components from 'iherb-components';
-import selectors from 'iherb-selectors';
-import translations from 'iherb-translations';
+import { PromoCode } from 'iherb-components';
+import { root } from 'iherb-selectors';
+import * as translations from 'iherb-translations';
 
-var PromoCode = Components.PromoCode.Component
-var workflowCart = selectors.root.workflowCart
-var config = selectors.root.config
+var workflowCart = root.workflowCart
+var config = root.config
 var actions = redux.workflowCart.actions
 var Translator = translations.cart
-var labels = Components.PromoCode.labels
+var labels = PromoCode.labels
 
 export const selectorFactory = dispatch => createSelector([ workflowCart, config ], (...args) => {
     const [
@@ -50,4 +49,4 @@ export const selectorFactory = dispatch => createSelector([ workflowCart, config
     }
 })
 
-export default connectAdvanced(selectorFactory)(PromoCode)
+export default connectAdvanced(selectorFactory)(PromoCode.Component)

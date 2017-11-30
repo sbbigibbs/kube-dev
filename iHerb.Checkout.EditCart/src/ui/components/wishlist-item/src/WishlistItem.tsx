@@ -85,8 +85,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 15,
     paddingRight: 15,
-    alignSelf: 'flex-start',
-    marginTop: 10
+    alignSelf: 'flex-start'
   },
   discounts: {
     color: '#7bb32e',

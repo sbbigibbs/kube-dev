@@ -2,17 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     //entry: ["./index.js"],
     //entry: "./index.tsx",
     output: {
-        filename: "bundle[name].js",
-        chunkFilename: "chunk[name].js",
-        path: path.join(process.cwd(), "/dist")
-        //publicPath: '/'
-        //libraryTarget:'commonjs'
+        filename: "bundle.[name].js",
+        chunkFilename: "[name].bundle.js",
+        path: path.join(process.cwd(), "/dist"),
+        publicPath: '/cart/public/'
+        //libraryTarget:
     },
     
     devtool: "source-map",
@@ -26,17 +27,7 @@ module.exports = {
             //'react-dom': 'preact-compat',
             'react-native': 'react-native-web',
             'primitives-loader': path.join(__dirname, 'src/loaders/postcss.js'),
-            'testLoader': path.resolve(__dirname, './src/webpack/lib/loaders/TestLoader.js'),
-            "iherb-api": path.resolve(process.cwd(), "./src/ui/api/index"),
-            "iherb-components": path.resolve(process.cwd(), "./src/ui/components/index"),
-            //"react-primitives": path.resolve(process.cwd(), "./src/ui/primitives/index"),
-            "iherb-containers": path.resolve(process.cwd(), "./src/ui/containers/index"),
-            "iherb-redux": path.resolve(process.cwd(), "./src/ui/redux/index"),
-            "iherb-sagas": path.resolve(process.cwd(), "./src/ui/sagas/index"),
-            "iherb-selectors": path.resolve(process.cwd(), "./src/ui/selectors/index"),
-            "iherb-translations": path.resolve(process.cwd(), "./src/ui/translations/index"),
-            "iherb-middleware": path.resolve(process.cwd(), "./src/ui/middleware/src/index"),
-            "iherb-pages": path.resolve(process.cwd(), "./src/ui/pages/index")
+             "react-primitives": "iherb-primitives"
         },
         plugins: [
             
@@ -46,6 +37,7 @@ module.exports = {
 
     module: {
         rules: [
+            
 
             { 
                 test: /\.jsx?$/, 
@@ -58,7 +50,7 @@ module.exports = {
                             presets: [
                                 [
                                     path.resolve(__dirname, '../../../node_modules/', './babel-preset-es2015'),  
-                                    { "modules": false }
+                                    { "modules": false, loose:true }
                                 ],
                                 path.resolve(__dirname, '../../../node_modules/', './babel-preset-react'), 
                                 //'react-hmre',
@@ -74,6 +66,39 @@ module.exports = {
                     }
                 ]
             },
+            {
+                test: /bundle\.(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: [
+                  //'react-hot-loader/webpack',
+                  {
+                      loader: 'bundle-loader',
+                      options: {
+                        name: '[name]'
+                      }
+                  },
+                  {
+                      loader: 'babel-loader' ,
+                      options: { 
+                          presets: [
+                              [
+                                  path.resolve(__dirname, '../../../node_modules/', './babel-preset-es2015'),  
+                                  { "modules": false }
+                              ],
+                              path.resolve(__dirname, '../../../node_modules/', './babel-preset-react'), 
+                              //'react-hmre',
+                              //"react-native-stage-0"
+                          ],
+                          plugins: [
+                              path.resolve(__dirname, '../../../node_modules/', './babel-plugin-dynamic-import-webpack'),
+                              //'react-hot-loader/babel'
+                              //path.resolve(__dirname, '../../../node_modules/', './react-hot-loader/babel')
+                          ]
+                      }
+                  },
+                  'awesome-typescript-loader'
+                ],
+              }
             {
               test: /\.(ts|tsx)$/,
               exclude: /node_modules/,
@@ -97,7 +122,8 @@ module.exports = {
                             //path.resolve(__dirname, '../../../node_modules/', './react-hot-loader/babel')
                         ]
                     }
-                }
+                },
+                'awesome-typescript-loader'
               ],
             }
         ]
@@ -110,6 +136,7 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production')
             }
         }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             //names: ["app", "subPageA"]
             // (choose the chunks, or omit for all chunks)
@@ -121,8 +148,19 @@ module.exports = {
             // (create an async commons chunk)
           
             // minChunks: 3,
-            // (3 children must share the module before it's separated)
-          })
+          }),
+        //   new webpack.NamedChunksPlugin(function(chunk) {
+        //     if (chunk.name) return chunk.name;
+        //     for (let m of chunk._modules) {
+        //       if (m.context && m.context.indexOf('node_modules') == -1) {
+        //         if (m.issuer && m.issuer.id) {
+        //           return path.basename(m.issuer.rawRequest);
+        //         } else {
+        //           return path.basename(m.rawRequest);
+        //         }
+        //       }
+        //     }
+        // })
         // new webpack.optimize.CommonsChunkPlugin({
         //     name: "manifest",
         //     minChunks: Infinity
